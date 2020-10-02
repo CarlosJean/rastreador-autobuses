@@ -1,0 +1,26 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "Backend del rastreador de autobuses.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CarlosJean/rastreador-autobuses.git"
+  },
+  "keywords": [
+    "nodejs"
+  ],
+  "author": "Jean Carlos Holguin Berihuete",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/CarlosJean/rastreador-autobuses/issues"
+  },
+  "homepage": "https://github.com/CarlosJean/rastreador-autobuses#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "socket.io": "^2.3.0"
+  }
+}
