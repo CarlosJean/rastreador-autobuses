@@ -4,10 +4,16 @@ const server = require('http').createServer(app);
 const options = { /* ... */ };
 const io = require('socket.io')(server, options);
 
-io.on('connection', socket => { /* ... */ 
+/* Socket IO */
+io.on('connection', socket => {
+  console.log('Client connected!');
+
+  //Receive location
   socket.on('location', (data) => {
-    console.log(JSON.stringify(data));
-  });
+    //Emit location to clients
+    io.emit('location',data)
+  });  
 });
+/* Socket IO */
 
 server.listen(3000);
