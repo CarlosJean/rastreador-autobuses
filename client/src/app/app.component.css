@@ -1,0 +1,17 @@
+:host{
+    height: 100%;
+    display: flex;
+}
+
+nz-header{
+    height: auto;
+}
+
+nz-header i{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 25px;
+    color: white;
+    
+}

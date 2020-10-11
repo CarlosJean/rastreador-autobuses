@@ -4,7 +4,8 @@
   "description": "Backend del rastreador de autobuses.",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
   },
   "repository": {
     "type": "git",
@@ -20,6 +21,7 @@
   },
   "homepage": "https://github.com/CarlosJean/rastreador-autobuses#readme",
   "dependencies": {
+    "@googlemaps/google-maps-services-js": "^3.1.13",
     "express": "^4.17.1",
     "socket.io": "^2.3.0"
   },

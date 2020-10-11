@@ -14,8 +14,8 @@ export class LocationSendingComponent implements OnInit {
     this.locationService.currentLocation();
   }
 
-  sendLocation(){
+  /* sendLocation(){
     this.locationService.currentLocation();
-  }
+  } */
 
 }
