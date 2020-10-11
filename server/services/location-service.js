@@ -1,5 +1,5 @@
 const {Client} = require("@googlemaps/google-maps-services-js");
-var global = require('../global/global');
+var secrets = require('../global/secrets');
 
 module.exports = {
     test:(origins = 0, destinations=0)=>{
@@ -13,7 +13,7 @@ module.exports = {
           params: {
             origins: [origins],
             destinations: [destinations],
-            key: global.googleApiKey,
+            key: secrets.googleApiKey,
           },
           timeout: 1000, // milliseconds
         })
