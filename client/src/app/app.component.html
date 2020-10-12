@@ -1,6 +1,12 @@
 <nz-layout>
+  <!-- Header -->
+  <nz-header nz-row>              
+    <i class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'" (click)="isCollapsed = !isCollapsed" nz-col nzXs=6 nzMd=1></i>
+    <p id=appName nz-col nzXs=18 nzMd=23>Rastreador de autobuses</p>
+  </nz-header>
+  <nz-layout>
     <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzTrigger]="null">
-        <div class="logo"></div>
+        <div class="logo">Jean Carlos Holgúín Berihuete</div>
         <ul nz-menu nzTheme="dark" nzMode="inline">
           <li nz-submenu nzTitle="User" nzIcon="user">
             <ul>
@@ -20,18 +26,12 @@
             <span>File</span>
           </li>
         </ul>
-      </nz-sider>
-      <nz-layout>
-          <!-- Header -->
-          <nz-header nz-row>              
-            <i class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'" (click)="isCollapsed = !isCollapsed" nz-col nzSpan=4></i>
-            <app-header nz-col nzSpan=20></app-header>
-          </nz-header>
-          <!-- body -->
-          <nz-content>
-              <router-outlet></router-outlet>
-          </nz-content>
-          <!-- Footer -->
-          <nz-footer>Footer</nz-footer>
-      </nz-layout>
+    </nz-sider>        
+    <!-- body -->
+    <nz-content>
+        <router-outlet></router-outlet>
+    </nz-content>
+  </nz-layout>
+  <!-- Footer -->
+  <nz-footer>Footer</nz-footer>
 </nz-layout>
