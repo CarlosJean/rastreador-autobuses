@@ -3,6 +3,13 @@
     display: flex;
 }
 
+#appName{
+    color: white;
+	font-size: 25px;
+	text-align: center;
+}
+
+/* Header */
 nz-header{
     height: auto;
 }
@@ -14,13 +21,19 @@ nz-header i{
     font-size: 25px;
     color: white;    
 }
+/* Header */
 
+/* Sider */
 nz-sider{
     color: white;
 }
 
-#appName{
+nz-divider{
     color: white;
-	font-size: 25px;
-	text-align: center;
 }
+
+nz-sider[nz-menu-item]{
+    cursor: pointer;
+}
+/* Sider */
+

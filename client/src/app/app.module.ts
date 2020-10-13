@@ -12,6 +12,8 @@ import { HeaderComponent } from './layout/header/header.component';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
+import { NzMenuModule } from 'ng-zorro-antd/menu';
 /* Ng Zorro */
 
 /* Socket IO Config */
@@ -39,7 +41,9 @@ import {SharedModule} from './shared/shared/shared.module';
     /* Ng Zorro */
     NzLayoutModule,
     NzGridModule,
-    NzIconModule
+    NzIconModule,
+    NzDividerModule,
+    NzMenuModule
     /* Ng Zorro */
   ],
   providers: [],

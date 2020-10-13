@@ -13,9 +13,4 @@ export class LocationSendingComponent implements OnInit {
   ngOnInit(): void {
     this.locationService.currentLocation();
   }
-
-  /* sendLocation(){
-    this.locationService.currentLocation();
-  } */
-
 }

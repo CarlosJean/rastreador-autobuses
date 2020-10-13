@@ -2,8 +2,8 @@
 const app = require('express')();
 const server = require('http').createServer(app);
 const options = { /* ... */ };
-const io = require('socket.io')(server, options);
 var locationService = require('./services/location-service');
+const realtimeEngine = require('./services/realtime-engine');
 
 // Configurar cabeceras y cors
 app.use((req, res, next) => {
@@ -18,20 +18,12 @@ app.use((req, res, next) => {
 app.get('/distance',(req,res)=>{
  origins = req.query.origins;
  destinations = req.query.origins;
- console.log(locationService.test(origins,destinations));
+ //console.log(locationService.test(origins,destinations));
 });
 /* Router */
 
-/* Socket IO */
-io.on('connection', socket => {
-  console.log('Client connected!');
-
-  //Receive location
-  socket.on('location', (data) => {
-    //Emit location to clients
-    io.emit('location',data)
-  });  
-});
-/* Socket IO */
+/* Realtime Engine */
+realtimeEngine(server,options);
+/* Realtime Engine */
 
 server.listen(3000);
