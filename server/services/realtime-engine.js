@@ -13,7 +13,7 @@ module.exports = (server,options)=>{
 
         //Client disconnect.
         socket.on('disconnect', () => {
-            console.log('user disconnected');
+            console.log('Client disconnected');
         });
     });
 }

@@ -10,6 +10,8 @@ import { map } from 'rxjs/operators';
 export class LocationService {
 
   serverUrl = 'http://localhost:3000';
+  navigatorId = 0;
+
   constructor(private socket:Socket, private http:HttpClient) {}
 
   getLocation(){
@@ -19,7 +21,7 @@ export class LocationService {
 
   currentLocation(){
     //Obtiene la ubicación actual de la app cliente.
-    navigator.geolocation.watchPosition((location)=>{
+   this.navigatorId=  navigator.geolocation.watchPosition((location)=>{
       let coordinates = {
         latitude:location.coords.latitude,
         longitude:location.coords.longitude,
@@ -34,7 +36,12 @@ export class LocationService {
     });
   }
 
-  distance(origin='',destination='') :Observable<any> {
+  stopLocalization(){
+    console.log(this.navigatorId);
+    navigator.geolocation.clearWatch(this.navigatorId);
+  }
+
+  distance(origin='',destination=''):Observable<any> {
 
     //Función para obtener ls datos de la distancia entre dos ubicaciones.
     let distanceUrl= this.serverUrl+'/distance';

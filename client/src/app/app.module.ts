@@ -14,6 +14,8 @@ import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
+/* import { NzCardModule } from 'ng-zorro-antd/card'; */
+/* import { NzModalModule } from 'ng-zorro-antd/modal'; */
 /* Ng Zorro */
 
 /* Socket IO Config */
@@ -40,11 +42,14 @@ import {SharedModule} from './shared/shared/shared.module';
     HttpClientModule,
     /* Ng Zorro */
     NzLayoutModule,
-    NzGridModule,
-    NzIconModule,
+    /* NzGridModule, */
+    /* NzIconModule, */
     NzDividerModule,
-    NzMenuModule
+    NzMenuModule,
+    /* NzCardModule */
+    /* NzModalModule */
     /* Ng Zorro */
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

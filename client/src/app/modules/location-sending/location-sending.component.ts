@@ -8,9 +8,23 @@ import { LocationService } from 'src/app/services/location/location.service';
 })
 export class LocationSendingComponent implements OnInit {
 
+  sendingLocation = false;
+  /* navigatorId:any=''; */
+
   constructor(private locationService:LocationService) { }
 
   ngOnInit(): void {
-    this.locationService.currentLocation();
+  }
+  
+  locationSending(){
+    if(this.sendingLocation){
+      this.sendingLocation = false;
+      this.locationService.stopLocalization();
+      //document.getElementsByClassName('notToSendLocation')[0].setAttribute('class','sendLocation');
+    }else{
+      this.sendingLocation = true;      
+      this.locationService.currentLocation();
+      //document.getElementsByClassName('sendLocation')[0].setAttribute('class','notToSendLocation');
+    }
   }
 }
