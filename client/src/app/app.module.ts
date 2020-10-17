@@ -10,23 +10,24 @@ import { HeaderComponent } from './layout/header/header.component';
 
 /* Ng Zorro */
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
-import { NzGridModule } from 'ng-zorro-antd/grid';
-import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
-/* import { NzCardModule } from 'ng-zorro-antd/card'; */
-/* import { NzModalModule } from 'ng-zorro-antd/modal'; */
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 /* Ng Zorro */
 
-/* Socket IO Config */
-const config: SocketIoConfig = { url: 'http://localhost:3000/', options: {origins: 'allowedOrigins'} };
-/* Socket IO Config */
+
 
 /* Shared */
 import {SharedModule} from './shared/shared/shared.module';
 /* Shared */
 
-/* import { NzLayoutModule } from 'ng-zorro-antd/layout'; */
+/* Environment */
+import { environment } from '../environments/environment';
+/* Environment */
+
+/* Angular Fire */
+import { AngularFireModule } from '@angular/fire';
+/* Angular Fire */
 
 @NgModule({
   declarations: [
@@ -34,21 +35,18 @@ import {SharedModule} from './shared/shared/shared.module';
     HeaderComponent
   ],
   imports: [
-    /* NzLayoutModule, */
     SharedModule,
     BrowserModule,
     AppRoutingModule,
-    SocketIoModule.forRoot(config),
+    SocketIoModule.forRoot(environment.socketIO),
     HttpClientModule,
     /* Ng Zorro */
     NzLayoutModule,
-    /* NzGridModule, */
-    /* NzIconModule, */
     NzDividerModule,
     NzMenuModule,
-    /* NzCardModule */
-    /* NzModalModule */
+    BrowserAnimationsModule,
     /* Ng Zorro */
+    AngularFireModule.initializeApp(environment.firebase)
     
   ],
   providers: [],

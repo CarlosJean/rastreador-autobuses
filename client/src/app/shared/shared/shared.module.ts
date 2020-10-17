@@ -13,8 +13,8 @@ import { LoginComponent } from '../login/login.component';
 @NgModule({
   declarations: [LoginComponent],
   imports: [
-    CommonModule,
-    BrowserAnimationsModule,
+    /* CommonModule, */
+    /* BrowserAnimationsModule, */
     /* Ng Zorro */
     NzCardModule,
     NzGridModule,
@@ -24,7 +24,7 @@ import { LoginComponent } from '../login/login.component';
     /* Ng Zorro */    
   ],
   exports:[
-    NzCardModule,NzGridModule,NzButtonModule,NzIconModule,NzModalModule,LoginComponent,BrowserAnimationsModule
+    NzCardModule,NzGridModule,NzButtonModule,NzIconModule,NzModalModule,LoginComponent/* ,BrowserAnimationsModule */
   ]
 })
 export class SharedModule { }

@@ -26,7 +26,7 @@
                 "output": "/assets/"
               },
               "src/favicon.ico",
-              "src/assets"              
+              "src/assets"
             ],
             "styles": [
               "src/styles.css",
@@ -123,8 +123,13 @@
               "devServerTarget": "client:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {}
         }
       }
-    }},
+    }
+  },
   "defaultProject": "client"
 }

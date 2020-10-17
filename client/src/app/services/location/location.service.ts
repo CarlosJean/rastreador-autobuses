@@ -37,7 +37,6 @@ export class LocationService {
   }
 
   stopLocalization(){
-    console.log(this.navigatorId);
     navigator.geolocation.clearWatch(this.navigatorId);
   }
 

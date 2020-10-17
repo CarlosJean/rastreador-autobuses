@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "bus-tracking-f456c": {
+      "hosting": {
+        "client": [
+          "bus-tracking-f456c"
+        ]
+      }
+    }
+  }
+}
