@@ -7,6 +7,7 @@ import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzModalModule } from 'ng-zorro-antd/modal';
+import { NzListModule } from 'ng-zorro-antd/list';
 /* Ng zorro */
 import { LoginComponent } from '../login/login.component';
 
@@ -20,11 +21,12 @@ import { LoginComponent } from '../login/login.component';
     NzGridModule,
     NzButtonModule,
     NzIconModule,
-    NzModalModule
+    NzModalModule,
+    NzListModule
     /* Ng Zorro */    
   ],
   exports:[
-    NzCardModule,NzGridModule,NzButtonModule,NzIconModule,NzModalModule,LoginComponent/* ,BrowserAnimationsModule */
+    NzCardModule,NzGridModule,NzButtonModule,NzIconModule,NzModalModule,LoginComponent,NzListModule/* ,BrowserAnimationsModule */
   ]
 })
 export class SharedModule { }
