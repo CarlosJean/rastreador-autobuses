@@ -13,4 +13,9 @@ export class RoutesService {
     //Se obtienen las rutas existentes en la base de datos.
     return this.firestore.collection('rutas').valueChanges();
   }
+
+  getRoute(internalId:string):Observable<any>{
+    //Se obtiene información acerca de una determinada ruta.
+    return this.firestore.collection('rutas',ref=>ref.where('internal_id','==', internalId)).valueChanges();
+  }
 }

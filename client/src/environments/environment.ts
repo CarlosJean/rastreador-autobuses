@@ -2,8 +2,22 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+import { SocketIoConfig } from 'ngx-socket-io';
+/* Socket IO Config */
+const socketIOConfig: SocketIoConfig = { url: 'http://localhost:3000/', options: {origins: 'allowedOrigins'} };
+/* Socket IO Config */
+
 export const environment = {
-  production: false
+  production: false,
+  firebase: {
+    apiKey: 'AIzaSyC5hg8L2_V5fhXwffRscnBRMB_DnA7AK6c',
+    authDomain: 'bus-tracking-f456c.firebaseapp.com',
+    databaseURL: 'https://bus-tracking-f456c.firebaseio.com',
+    projectId: 'bus-tracking-f456c',
+    storageBucket: 'bus-tracking-f456c.appspot.com',
+    messagingSenderId: '924155774810'
+  },
+  socketIO: socketIOConfig
 };
 
 /*

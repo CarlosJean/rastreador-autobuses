@@ -1,0 +1,26 @@
+nz-list{
+	width: 95%;
+	margin: 0 auto;
+}
+
+nz-list-item{
+	transition: all 0.5s ease;
+}
+
+nz-list-item a {
+	width: 100%;
+	text-decoration: none;
+	color: black;
+}
+
+nz-list-item:hover{
+	background-color: #eeebeb;
+}
+
+::ng-deep .ant-list-header{
+	background: #1890ff;
+}
+
+::ng-deep .ant-list-header h5{
+	color: white;
+}

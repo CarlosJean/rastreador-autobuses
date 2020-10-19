@@ -8,11 +8,13 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzListModule } from 'ng-zorro-antd/list';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
 /* Ng zorro */
 import { LoginComponent } from '../login/login.component';
+import { RealtimeMapComponent } from '../location/realtime-map/realtime-map.component';
 
 @NgModule({
-  declarations: [LoginComponent],
+  declarations: [LoginComponent, RealtimeMapComponent],
   imports: [
     /* CommonModule, */
     /* BrowserAnimationsModule, */
@@ -22,11 +24,12 @@ import { LoginComponent } from '../login/login.component';
     NzButtonModule,
     NzIconModule,
     NzModalModule,
-    NzListModule
+    NzListModule,
+    NzDividerModule
     /* Ng Zorro */    
   ],
   exports:[
-    NzCardModule,NzGridModule,NzButtonModule,NzIconModule,NzModalModule,LoginComponent,NzListModule/* ,BrowserAnimationsModule */
+    NzCardModule,NzGridModule,NzButtonModule,NzIconModule,NzModalModule,LoginComponent,NzListModule,RealtimeMapComponent,NzDividerModule/* ,BrowserAnimationsModule */
   ]
 })
 export class SharedModule { }

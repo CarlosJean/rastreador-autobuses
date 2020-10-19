@@ -1,0 +1,13 @@
+nz-card{
+    width: 95%;
+    margin: 0 auto;
+}
+
+::ng-deep .ant-card-head{
+    background: #1890ff;
+    color: white;
+}
+
+#realtimeMapCard iframe{
+    width: 100%;
+}

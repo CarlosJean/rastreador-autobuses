@@ -1,0 +1,21 @@
+<!-- Card details -->
+<nz-card [nzTitle]=title id="routeDetailsCard">
+    <p><strong>{{route.nombre}}</strong> {{route.descripcion}}</p>
+</nz-card>
+
+<ng-template #title >
+    <p>Ruta {{route.internal_id}}</p>
+</ng-template>
+<!-- Card details -->
+<!-- Realtime map -->
+<nz-card id="realtimeMapCard" [nzTitle]="locationInfo">
+    <div nz-row>
+        <div nz-col nzSm=24 nzMd=12>
+            <app-realtime-map></app-realtime-map>
+        </div>
+    </div>
+</nz-card>
+<ng-template #locationInfo >
+    <p>Localización</p>
+</ng-template>
+<!-- Realtime map -->
