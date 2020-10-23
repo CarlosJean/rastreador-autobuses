@@ -15,8 +15,6 @@ import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 /* Ng Zorro */
 
-
-
 /* Shared */
 import {SharedModule} from './shared/shared/shared.module';
 /* Shared */

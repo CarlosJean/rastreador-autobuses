@@ -1,1 +1,23 @@
-<p>login works!</p>
+<nz-modal [(nzVisible)]="isVisible" nzTitle="Acceso" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()" [nzFooter]="modalFooter">
+    <form nz-form class="login-form" [formGroup]="login">
+        <nz-form-item>
+          <nz-form-control nzErrorTip="Por favor introduce tu número de cédula">
+            <nz-input-group nzPrefixIcon="user">
+              <input type="text" nz-input placeholder="Número de cédula"formControlName="identification"/>
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-control nzErrorTip="Por favor introduce tu contraseña">
+            <nz-input-group nzPrefixIcon="lock">
+              <input type="password" nz-input placeholder="Contraseña" formControlName="password"/>
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+      </form>
+    <ng-template #modalFooter>
+      <button nz-button nzType="default" (click)="handleCancel()">Cerrar</button>
+      <button nz-button nzType="primary" (click)="handleOk()" [nzLoading]="isConfirmLoading">Acceder</button>
+    </ng-template>
+</nz-modal> 
+

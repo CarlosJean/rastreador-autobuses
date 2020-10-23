@@ -17,7 +17,9 @@ export const environment = {
     storageBucket: 'bus-tracking-f456c.appspot.com',
     messagingSenderId: '924155774810'
   },
-  socketIO: socketIOConfig
+  socketIO: socketIOConfig,
+  googleApiKey:'AIzaSyDcmHvB8H06BFKCoyYypWgkwYFN6A_YBsc'
+  /* googleApiKey:'AIzaSyAMlYbiejd5AybZatCXnzA9vR5UCOSSEPQ' */
 };
 
 /*

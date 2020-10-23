@@ -30,7 +30,8 @@ export class LocationService {
         altitudeAccuracy:location.coords.altitudeAccuracy,
         heading:location.coords.heading,
         speed:location.coords.speed,
-        timestamp:location.timestamp
+        timestamp:location.timestamp,
+        driver:1
       }
       this.socket.emit('location',coordinates);
     });
