@@ -19,7 +19,7 @@ export class LocationService {
     return this.socket.fromEvent('location').pipe(map((data)=>data));
   }
 
-  currentLocation(){
+  currentLocation(driverId:string, routeId:string){
     //Obtiene la ubicación actual de la app cliente.
    this.navigatorId=  navigator.geolocation.watchPosition((location)=>{
       let coordinates = {
@@ -31,7 +31,8 @@ export class LocationService {
         heading:location.coords.heading,
         speed:location.coords.speed,
         timestamp:location.timestamp,
-        driver:1
+        driver:driverId,
+        route:routeId
       }
       this.socket.emit('location',coordinates);
     });

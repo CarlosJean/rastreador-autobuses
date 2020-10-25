@@ -28,8 +28,7 @@ export class LoginComponent implements OnInit {
     let documentNumber = this.login.value.identification;
     let password = this.login.value.password;
 
-    this.loginService.checkUser(documentNumber,password).subscribe(user=>{  
-      console.log(user);
+    this.loginService.checkUser(documentNumber,password).subscribe(user=>{ 
       let UserData = user[0];
       sessionStorage.setItem('userData',JSON.stringify(UserData));
       this.userData.emit(UserData);

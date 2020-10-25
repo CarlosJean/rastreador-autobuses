@@ -1,8 +1,8 @@
 <div>    
     <nz-list nzBordered nzSize="small" [nzHeader]="routesCardHeader">
-        <!-- <nz-list-header><h5>Rutas</h5></nz-list-header> -->
         <nz-list-item *ngFor="let route of routes">
-          <a [routerLink]="['./route-details',route.internal_id]">{{route.nombre}}</a>              
+          <a [routerLink]="['/location-sending']" *ngIf="user != null && user.charge == 'driver'">{{route.nombre}}</a>              
+          <a [routerLink]="['./route-details',route.internal_id]" *ngIf="user == null">{{route.nombre}}</a>              
         </nz-list-item>
     </nz-list>
 </div>

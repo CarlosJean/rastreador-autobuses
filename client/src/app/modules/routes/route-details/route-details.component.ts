@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { LoginService } from 'src/app/services/login/login.service';
 import { RoutesService } from 'src/app/services/routes/routes.service';
 
 @Component({
@@ -9,17 +10,22 @@ import { RoutesService } from 'src/app/services/routes/routes.service';
 })
 export class RouteDetailsComponent implements OnInit {
 
+  user:any = {};
   route:any = {};
-  constructor(private routesService:RoutesService,private activatedRoute:ActivatedRoute) { }
+  constructor(private routesService:RoutesService,private activatedRoute:ActivatedRoute,private loginService:LoginService) { }
 
   ngOnInit(): void {
+    this.getLoggedUser();
     this.activatedRoute.params.subscribe((param)=>{
-      this.routesService.getRoute(param.internalId).subscribe((route)=>{
+      this.routesService.getRouteByInternalId(param.internalId).subscribe((route)=>{
         this.route = route[0];
-        console.log(this.route);
       });
     });
+  }
 
+  private getLoggedUser(){
+    this.user = JSON.parse(this.loginService.userLogged());
+    console.log(this.user);
   }
 
 }

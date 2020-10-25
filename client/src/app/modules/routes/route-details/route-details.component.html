@@ -1,21 +1,26 @@
-<!-- Card details -->
-<nz-card [nzTitle]=title id="routeDetailsCard">
-    <p><strong>{{route.nombre}}</strong> {{route.descripcion}}</p>
-</nz-card>
+<div nz-row nzJustify="center">
+    <!-- Card details -->
+    <nz-card [nzTitle]=title id="routeDetailsCard" nz-col nzSpan=20>
+        <p><strong>{{route.nombre}}</strong> {{route.descripcion}}</p>
+    </nz-card>
+    
+    <ng-template #title >
+        <p>Ruta {{route.internal_id}}</p>
+    </ng-template>
+    <!-- Card details -->
 
-<ng-template #title >
-    <p>Ruta {{route.internal_id}}</p>
-</ng-template>
-<!-- Card details -->
-<!-- Realtime map -->
-<nz-card id="realtimeMapCard" [nzTitle]="locationInfo">
-    <div nz-row>
-        <div nz-col nzSm=24 nzMd=12>
-            <app-realtime-map></app-realtime-map>
+    <app-location-sending nz-col nzSpan=20 *ngIf="user !=null && user.charge == 'driver'"></app-location-sending>
+
+    <!-- Realtime map -->
+    <nz-card id="realtimeMapCard" [nzTitle]="locationInfo" nz-col nzSpan=20 *ngIf="user==null || user.charge != 'driver'">
+        <div nz-row>
+            <div nz-col nzSm=24 nzMd=12>
+                <app-realtime-map></app-realtime-map>
+            </div>
         </div>
-    </div>
-</nz-card>
-<ng-template #locationInfo >
-    <p>Localización</p>
-</ng-template>
-<!-- Realtime map -->
+    </nz-card>
+    <ng-template #locationInfo >
+        <p>Localización</p>
+    </ng-template>
+    <!-- Realtime map -->
+</div>

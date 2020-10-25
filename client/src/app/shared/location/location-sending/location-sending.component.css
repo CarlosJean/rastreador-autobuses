@@ -1,0 +1,12 @@
+::ng-deep .ant-card-head {
+	background: #1890ff;
+	color: white;
+}
+
+#btnSendLocation{
+    background-color: green;
+}
+
+button{
+    transition: all 1s ease;
+}

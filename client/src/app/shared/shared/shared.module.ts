@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserModule } from '@angular/platform-browser';
 /* Ng zorro */
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzGridModule } from 'ng-zorro-antd/grid';
@@ -19,12 +20,13 @@ import { environment } from 'src/environments/environment';
 
 /* Forms */
 import { ReactiveFormsModule,FormsModule } from '@angular/forms';
+import { LocationSendingComponent } from '../location/location-sending/location-sending.component';
 /* Forms */
 
 @NgModule({
-  declarations: [LoginComponent, RealtimeMapComponent],
+  declarations: [LoginComponent, RealtimeMapComponent, LocationSendingComponent],
   imports: [
-    /* CommonModule, */
+    CommonModule,
     /* BrowserAnimationsModule, */
     /* Ng Zorro */
     NzCardModule,
@@ -46,7 +48,7 @@ import { ReactiveFormsModule,FormsModule } from '@angular/forms';
   exports:[
     NzCardModule,NzGridModule,NzButtonModule,NzIconModule,NzModalModule,
     LoginComponent,NzListModule,RealtimeMapComponent,NzDividerModule,AgmCoreModule,
-    NzFormModule,NzInputModule,ReactiveFormsModule,FormsModule/* ,BrowserAnimationsModule */
+    NzFormModule,NzInputModule,ReactiveFormsModule,FormsModule,LocationSendingComponent
   ]
 })
 export class SharedModule { }
