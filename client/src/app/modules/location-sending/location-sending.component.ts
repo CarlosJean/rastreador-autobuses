@@ -23,7 +23,7 @@ export class LocationSendingComponent implements OnInit {
       //document.getElementsByClassName('notToSendLocation')[0].setAttribute('class','sendLocation');
     }else{
       this.sendingLocation = true;      
-      this.locationService.currentLocation();
+      //this.locationService.currentLocation();
       //document.getElementsByClassName('sendLocation')[0].setAttribute('class','notToSendLocation');
     }
   }

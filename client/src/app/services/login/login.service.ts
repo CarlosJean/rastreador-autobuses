@@ -7,7 +7,12 @@ import { Observable } from 'rxjs';
 })
 export class LoginService {
 
-  constructor(private firestore:AngularFirestore) { }
+  user:any = {};
+
+  constructor(private firestore:AngularFirestore) { 
+
+    this.user = this.userLogged();
+  }
 
    async access(documentNumber=null, password=null):Promise<any>{
      let json = {};

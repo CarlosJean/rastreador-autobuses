@@ -17,8 +17,8 @@ app.use((req, res, next) => {
 /* Router */
 app.get('/distance',(req,res)=>{
  origins = req.query.origins;
- destinations = req.query.origins;
- //console.log(locationService.test(origins,destinations));
+ destinations = req.query.destinations;
+ console.log(locationService.test(origins,destinations));
 });
 /* Router */
 

@@ -12,6 +12,7 @@ import { NzListModule } from 'ng-zorro-antd/list';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input'
+import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 /* Ng zorro */
 import { LoginComponent } from '../login/login.component';
 import { RealtimeMapComponent } from '../location/realtime-map/realtime-map.component';
@@ -38,6 +39,7 @@ import { LocationSendingComponent } from '../location/location-sending/location-
     NzDividerModule,
     NzFormModule,
     NzInputModule,
+    NzDrawerModule,
     /* Ng Zorro */     
     AgmCoreModule.forRoot({
       apiKey: environment.googleApiKey
@@ -48,7 +50,7 @@ import { LocationSendingComponent } from '../location/location-sending/location-
   exports:[
     NzCardModule,NzGridModule,NzButtonModule,NzIconModule,NzModalModule,
     LoginComponent,NzListModule,RealtimeMapComponent,NzDividerModule,AgmCoreModule,
-    NzFormModule,NzInputModule,ReactiveFormsModule,FormsModule,LocationSendingComponent
+    NzFormModule,NzInputModule,ReactiveFormsModule,FormsModule,LocationSendingComponent,NzDrawerModule
   ]
 })
 export class SharedModule { }

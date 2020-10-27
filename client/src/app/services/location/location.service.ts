@@ -51,4 +51,8 @@ export class LocationService {
     return this.http.get(distanceUrl,{params:params});    
   }
 
+  getMyCurrentLocation(callback){
+    return navigator.geolocation.getCurrentPosition(callback);
+  }
+
 }

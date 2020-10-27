@@ -12,6 +12,7 @@ export class RouteDetailsComponent implements OnInit {
 
   user:any = {};
   route:any = {};
+  drawerVisible:boolean = false;
   constructor(private routesService:RoutesService,private activatedRoute:ActivatedRoute,private loginService:LoginService) { }
 
   ngOnInit(): void {
@@ -25,7 +26,6 @@ export class RouteDetailsComponent implements OnInit {
 
   private getLoggedUser(){
     this.user = JSON.parse(this.loginService.userLogged());
-    console.log(this.user);
   }
 
 }

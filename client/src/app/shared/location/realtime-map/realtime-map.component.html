@@ -1,3 +1,7 @@
-<agm-map [latitude]="18.5045791" [longitude]="-69.7980006">
-    <agm-marker [latitude]="18.5045791" [longitude]="-69.7980006"></agm-marker> 
+<agm-map [latitude]="18.5045791" [longitude]="-69.7980006">  
+    <agm-marker [latitude]="myLocationLatitude" [longitude]="myLocationLongitude" label="Yo"></agm-marker>
+    <agm-marker [latitude]="location.latitude" [longitude]="location.longitude" label="Autobus" *ngFor="let location of pool" (markerClick)="markerClick(location.driver)"></agm-marker> 
 </agm-map>
+<nz-drawer [nzClosable]="false" [nzVisible]="drawerVisible" [nzPlacement]="placement" nzTitle="Información del autobús" (nzOnClose)="drawerClose()">
+    <p id="distanceInfo">Este autobus llega en 5 minutos aproximadamente.</p>
+</nz-drawer>
