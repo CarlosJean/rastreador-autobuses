@@ -1,16 +1,17 @@
 <nz-modal [(nzVisible)]="isVisible" nzTitle="Acceso" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()" [nzFooter]="modalFooter">
+  <nz-alert nzType="warning" nzMessage="Advertencia" nzDescription="El usuario o contraseña introducidos son incorrectos." *ngIf="userNotFound" nzShowIcon></nz-alert>
     <form nz-form class="login-form" [formGroup]="login">
         <nz-form-item>
           <nz-form-control nzErrorTip="Por favor introduce tu número de cédula">
             <nz-input-group nzPrefixIcon="user">
-              <input type="text" nz-input placeholder="Número de cédula"formControlName="identification"/>
+              <input type="text" nz-input placeholder="Número de cédula"formControlName="identification" (keyup)="inputChange()"/>
             </nz-input-group>
           </nz-form-control>
         </nz-form-item>
         <nz-form-item>
           <nz-form-control nzErrorTip="Por favor introduce tu contraseña">
             <nz-input-group nzPrefixIcon="lock">
-              <input type="password" nz-input placeholder="Contraseña" formControlName="password"/>
+              <input type="password" nz-input placeholder="Contraseña" formControlName="password" (keyup)="inputChange()"/>
             </nz-input-group>
           </nz-form-control>
         </nz-form-item>

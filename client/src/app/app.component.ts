@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { LocationService } from './services/location/location.service';
 import { LoginService } from './services/login/login.service';
 
@@ -13,10 +14,11 @@ export class AppComponent {
   loginModalVisible = false;
   user:any = {};
 
-  constructor(private loginService:LoginService){}
+  constructor(private loginService:LoginService, private router:Router, private locationService:LocationService){}
 
   ngOnInit():void{
     this.user = JSON.parse(this.loginService.userLogged());
+    //this.user = this.loginService.user;
   }
 
   showLoginModal(){
@@ -37,7 +39,21 @@ export class AppComponent {
   }
 
   setUserData(userData:any){
-    console.log(userData);
     if(userData != null) this.user = userData;
+  }
+
+  confirm(){
+    this.stopLocationSending();
+    this.logout();
+  }
+
+  cancel(){}
+
+  stopLocationSending(){
+    //Detiene el envío de la ubicación del conductor logueado
+    let route = this.router.url.split('/')[2];
+    if(this.user != null && this.user.charge == 'driver' && route == 'route-details')
+      this.locationService.stopLocalization();
+    
   }
 }

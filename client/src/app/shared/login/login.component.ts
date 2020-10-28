@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { NzMessageService } from 'ng-zorro-antd/message';
 import {LoginService} from '../../services/login/login.service';
 /* import {Md5} from 'ts-md5/dist/md5'; */
 @Component({
@@ -12,14 +13,17 @@ export class LoginComponent implements OnInit {
   @Input() isVisible = false;
   @Output() loginModalVisible= new EventEmitter<boolean>();
   @Output() userData = new EventEmitter<any>();
+  userNotFound:boolean = false;
 
-  identification:string = null;
-  password:string = null;
+  /* identification:string = null;
+  password:string = null; */
   login = new FormGroup({
     identification: new FormControl(''), 
     password: new FormControl('')
-  })
-  constructor(private loginService:LoginService) { }
+  });
+
+
+  constructor(private loginService:LoginService, private message: NzMessageService) { }
 
   ngOnInit(): void {
   }
@@ -28,16 +32,28 @@ export class LoginComponent implements OnInit {
     let documentNumber = this.login.value.identification;
     let password = this.login.value.password;
 
-    this.loginService.checkUser(documentNumber,password).subscribe(user=>{ 
-      let UserData = user[0];
-      sessionStorage.setItem('userData',JSON.stringify(UserData));
-      this.userData.emit(UserData);
-    });
+    this.loginService.findUser(documentNumber,password).subscribe(userFound=>{ 
 
-    this.loginModalVisible.emit(false);
+      if(userFound.length > 0){
+        let UserData = userFound[0];
+        sessionStorage.setItem('userData',JSON.stringify(UserData));
+        this.loginService.userLogged();
+        this.userData.emit(UserData);
+        this.userNotFound = false;
+        this.loginModalVisible.emit(false);
+        this.message.success(`Bienvenido ${UserData.names} ${UserData.surnames}`);
+        
+      }else{
+        this.userNotFound = true;
+      }
+    });    
   }
 
   handleCancel(){
     this.loginModalVisible.emit(false);
+  }
+
+  inputChange(){
+    this.userNotFound = false;
   }
 }
