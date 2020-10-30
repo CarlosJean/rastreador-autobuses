@@ -7,4 +7,4 @@
 </nz-card>
 
 <!-- Modal -->
-<app-login [isVisible]="loginModalVisible" (loginModalVisible)="changeLoginModalState($event)"></app-login>
+<app-login [isVisible]="loginModalVisible" (loginModalVisible)="changeLoginModalState($event)" (userData)="setUserData($event)"></app-login>

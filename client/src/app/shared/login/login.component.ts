@@ -37,7 +37,8 @@ export class LoginComponent implements OnInit {
       if(userFound.length > 0){
         let UserData = userFound[0];
         sessionStorage.setItem('userData',JSON.stringify(UserData));
-        this.loginService.userLogged();
+        //console.log(UserData);
+        //this.loginService.userLogged();
         this.userData.emit(UserData);
         this.userNotFound = false;
         this.loginModalVisible.emit(false);

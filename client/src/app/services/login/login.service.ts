@@ -7,37 +7,22 @@ import { Observable } from 'rxjs';
 })
 export class LoginService {
 
-  user:any = {};
 
-  constructor(private firestore:AngularFirestore) { 
-    this.user = this.userLogged();
-  }
-
-  async access(documentNumber=null, password=null):Promise<any>{
-     let json = {};
-
-    if(documentNumber == null || password == null) json = JSON.stringify({ status: 400, message: 'Número de cédula o contraseña no deben ser nulos.' });
-  
-     this.findUser().subscribe((user) => {
-      if (user.length == 0) json = JSON.stringify({ status: 204, message: 'Usuario no encontrado.' });
-      
-      json = JSON.stringify({ status: 200, message: 'Bienvenido.' });
-
-    });
-
-    return json;
-  }
+  constructor(private firestore:AngularFirestore) { }
 
   findUser(documentNumber = null, password = null):Observable<any>{
+    //Busca el usuario dado un número de documento y una contraseña.
     return this.firestore.collection('users',ref=>ref.where('document_number','==',documentNumber)
     .where('password','==',password)).valueChanges();
   }
 
   userLogged(){
-    return sessionStorage.getItem('userData');
+    //Retorna el usuario logueado actualmente
+    return JSON.parse(sessionStorage.getItem('userData'));
   }
 
   logout(){
+    //Remueve el objeto usuario que está en el almacenamiento de la sesión.
     sessionStorage.removeItem('userData');
   }
 }

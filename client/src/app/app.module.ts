@@ -25,6 +25,7 @@ import { environment } from '../environments/environment';
 
 /* Angular Fire */
 import { AngularFireModule } from '@angular/fire';
+import { LoginService } from './services/login/login.service';
 /* Angular Fire */
 
 @NgModule({
@@ -47,7 +48,7 @@ import { AngularFireModule } from '@angular/fire';
     AngularFireModule.initializeApp(environment.firebase)
     
   ],
-  providers: [],
+  providers: [LoginService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

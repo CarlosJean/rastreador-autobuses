@@ -17,9 +17,12 @@ export class RoutesComponent implements OnInit {
   ngOnInit():void {
 
     //Verificamos si hay usuario logueado.
-    this.user = JSON.parse(this.loginService.userLogged());
+    this.user = this.loginService.user;
+
+    console.log(this.user);
 
     if(this.user!=null && this.user.charge == 'driver'){
+      console.log('User is driver!');
       this.driverRoute(this.user);
     }else{
       this.routesService.getRoutes().subscribe((routes)=>{

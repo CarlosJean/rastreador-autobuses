@@ -9,3 +9,7 @@ agm-marker{
 #distanceInfo{
     text-align: center;
 }
+
+.busMarker{
+    height: 5px;
+}

@@ -20,12 +20,16 @@ export class RealtimeMapComponent implements OnInit {
   myLocationLongitude = 0;
   /* private selectedMarker = null; */
 
+  //Marcador de autobus
+  passengerIcon = { url: '../../assets/icons/blue-map-marker.png', scaledSize: {height: 40, width: 25}}
+  busIcon = { url: '../../assets/icons/autobus.png', scaledSize: {height: 40, width: 40}}
+
   constructor(private locationService:LocationService,private activatedRoute:ActivatedRoute,private loginService:LoginService) { }
 
   ngOnInit(): void {
 
     //Si el usuario logueado es invitado se obtiene la localización actual.
-    if(this.loginService.user == null) this.myCurrentLocation();
+    if(this.loginService.userLogged() == null) this.myCurrentLocation();
     
     this.locationService.getLocation().subscribe((busLocation:any)=>{
       if(busLocation != null) this.addLocationToPool(busLocation);              
@@ -39,13 +43,14 @@ export class RealtimeMapComponent implements OnInit {
       if(param.internalId == busLocation.route){
         let driverExists = this.pool.some((location)=>location.driver == busLocation.driver);
         if(driverExists){
+          //Si el conductor ya existe en el pool entonces se remueve para volver a introducir la información de su localización.
           var removeIndex = this.pool.map(function(item) { return item.driver; }).indexOf(busLocation.driver);
           this.pool.splice(removeIndex, 1);
         }
+
         this.pool.push(busLocation);        
         let markerInfo = this.pool.filter((element)=>this.selectedDriver == element.driver);
-        if(markerInfo.length > 0) this.getDistance(markerInfo);
-        
+        if(markerInfo.length > 0) this.getDistance(markerInfo);        
       }  
     });
   }
@@ -53,7 +58,6 @@ export class RealtimeMapComponent implements OnInit {
   markerClick(driverId){
     this.selectedDriver = driverId;   
     this.drawerVisible = true; 
-    console.log(this.drawerVisible);
   }
 
   getDistance(markerInfo){    

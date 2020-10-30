@@ -25,7 +25,8 @@ export class RouteDetailsComponent implements OnInit {
   }
 
   private getLoggedUser(){
-    this.user = JSON.parse(this.loginService.userLogged());
+    this.user = this.loginService.userLogged();
+    //console.log(this.loginService.userLogged());
   }
 
 }

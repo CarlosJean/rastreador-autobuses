@@ -12,13 +12,12 @@ export class AppComponent {
   title = 'client';
   isCollapsed = true;
   loginModalVisible = false;
-  user:any = {};
+  user:any = this.loginService.userLogged();
+  
+  constructor(private loginService:LoginService, private router:Router, private locationService:LocationService){
+  }
 
-  constructor(private loginService:LoginService, private router:Router, private locationService:LocationService){}
-
-  ngOnInit():void{
-    this.user = JSON.parse(this.loginService.userLogged());
-    //this.user = this.loginService.user;
+  ngOnInit():void{ 
   }
 
   showLoginModal(){
@@ -26,6 +25,7 @@ export class AppComponent {
   }
 
   loginModal(){
+    //Función que 
     this.loginModalVisible ? this.loginModalVisible = false : this.loginModalVisible = true;
   }
 
@@ -47,9 +47,7 @@ export class AppComponent {
     this.logout();
   }
 
-  cancel(){}
-
-  stopLocationSending(){
+  private stopLocationSending(){
     //Detiene el envío de la ubicación del conductor logueado
     let route = this.router.url.split('/')[2];
     if(this.user != null && this.user.charge == 'driver' && route == 'route-details')
