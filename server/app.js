@@ -18,7 +18,7 @@ app.use((req, res, next) => {
 app.get('/distance',(req,res)=>{
  origins = req.query.origins;
  destinations = req.query.destinations;
- console.log(locationService.test(origins,destinations));
+ //console.log('Time: '+locationService.time(origins,destinations));
 });
 /* Router */
 

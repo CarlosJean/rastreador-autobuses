@@ -7,7 +7,10 @@ module.exports = (server,options)=>{
 
         //Receive location from drivers.
         socket.on('location', (data) => {
-            console.log(data);
+            //console.log(data);
+            /* let diferencia = Date.now() - 1604447459534/* data.timestamp/;
+            let minuteDiference = Math.round(((diferencia % 86400000) % 3600000) / 60000); // minutes
+            console.log('Minutos de diferencia' + minuteDiference); */
             //Emit location to passengers
             io.emit('location',data)
         });  

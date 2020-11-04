@@ -11,10 +11,12 @@ export class LocationService {
 
   serverUrl = 'http://localhost:3000';
   navigatorId = 0;
-
+  
+  readonly inactiveTimeLimit = 1; //Limite de tiempo que un conductor puede estar inactivo sin enviar ubicación.
+  
   constructor(private socket:Socket, private http:HttpClient) {}
 
-  getLocation(){
+  getDriversLocation(){
     //Obtiene la ubicación desde el servidor.
     return this.socket.fromEvent('location').pipe(map((data)=>data));
   }

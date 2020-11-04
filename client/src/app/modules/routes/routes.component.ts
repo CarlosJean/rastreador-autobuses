@@ -17,7 +17,7 @@ export class RoutesComponent implements OnInit {
   ngOnInit():void {
 
     //Verificamos si hay usuario logueado.
-    this.user = this.loginService.user;
+    this.user = this.loginService.userLogged();
 
     console.log(this.user);
 

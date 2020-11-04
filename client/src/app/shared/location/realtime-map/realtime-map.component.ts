@@ -12,13 +12,15 @@ import { LoginService } from 'src/app/services/login/login.service';
 export class RealtimeMapComponent implements OnInit {
 
   @Input() location:any = {};
-  pool:Array<any> = [];
+  pool:Array<any> = []; //Variable que almacena la ubicación de los conductores de una ruta dada.
   private selectedDriver = null;
   drawerVisible:boolean = false;
   placement: NzDrawerPlacement = 'bottom';
   myLocationLatitude = 0;
   myLocationLongitude = 0;
   /* private selectedMarker = null; */
+
+  markerInfo:any = {}; //Almacena los datos del conductor, dependiendo del marcador seleccionado.
 
   //Marcador de autobus
   passengerIcon = { url: '../../assets/icons/blue-map-marker.png', scaledSize: {height: 40, width: 25}}
@@ -31,10 +33,15 @@ export class RealtimeMapComponent implements OnInit {
     //Si el usuario logueado es invitado se obtiene la localización actual.
     if(this.loginService.userLogged() == null) this.myCurrentLocation();
     
-    this.locationService.getLocation().subscribe((busLocation:any)=>{
+    this.locationService.getDriversLocation().subscribe((busLocation:any)=>{
       if(busLocation != null) this.addLocationToPool(busLocation);              
     });
     
+    //Cada 5 minutos se eliminan del pool los conductores que no están enviando su ubicación.
+    setInterval(()=>{
+      this.eliminateInactiveDrivers(this.pool);
+    },3000);
+
   }
 
   addLocationToPool(busLocation:any){
@@ -48,9 +55,10 @@ export class RealtimeMapComponent implements OnInit {
           this.pool.splice(removeIndex, 1);
         }
 
-        this.pool.push(busLocation);        
-        let markerInfo = this.pool.filter((element)=>this.selectedDriver == element.driver);
-        if(markerInfo.length > 0) this.getDistance(markerInfo);        
+        this.pool.push(busLocation);    
+        
+        this.markerInfo = this.pool.filter((element)=>this.selectedDriver == element.driver);
+        if(this.markerInfo.length > 0) this.getDistance(this.markerInfo);        
       }  
     });
   }
@@ -81,5 +89,30 @@ export class RealtimeMapComponent implements OnInit {
       this.myLocationLatitude = location.coords.latitude;
       this.myLocationLongitude = location.coords.longitude;
     });
+  }
+
+  eliminateInactiveDrivers(pool:Array<any>){
+    /* Función que elimina del pool la ubicación de los conductores que han dejado de emitir su ubicación.*/
+
+    if(pool.length > 0){
+      pool.forEach((locationData)=>{
+  
+        let timeDiff = Date.now() - locationData.timestamp;
+        let minuteDiference = Math.round(((timeDiff % 86400000) % 3600000) / 60000); // minutes
+  
+        //Si el tiempo de envío de cierta ubicación es igual o excede los 5 minutos entonces se remueve del pool.
+        if(this.locationService.inactiveTimeLimit <= minuteDiference){
+          let removeIndex = this.pool.map((item)=>item.driver).indexOf(locationData.driver);
+          this.pool.splice(removeIndex, 1);
+
+          /* Verifica si el conductor del marcador seleccionado dejó de enviar su ubicación 
+          para dejar de obtener la distancia entre el pasajero y el conductor.*/
+          if(this.markerInfo.driver == locationData.driver)
+            this.markerInfo = {};
+        }
+  
+      });
+    }
+
   }
 }
