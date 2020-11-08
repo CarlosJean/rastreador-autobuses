@@ -33,6 +33,7 @@ export class DriverService {
         route: this.routeId
       }
 
+      this.locationService.navigatorId = this.navigatorId;
       //Emitimos las coordenadas al servidor.
       this.socket.emit('location',coordinates);
     },()=>{

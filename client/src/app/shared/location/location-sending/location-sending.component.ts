@@ -4,20 +4,21 @@ import { AppComponent } from 'src/app/app.component';
 import { DriverService } from 'src/app/services/driver/driver.service';
 import { LocationService } from 'src/app/services/location/location.service';
 import { LoginService } from 'src/app/services/login/login.service';
+import {SidebarComponent} from 'src/app/layout/sidebar/sidebar.component';
 
 @Component({
   selector: 'app-location-sending',
   templateUrl: './location-sending.component.html',
   styleUrls: ['./location-sending.component.css'],
-  providers:[LoginService]
+  /* providers:[LoginService] */
 })
 export class LocationSendingComponent implements OnInit {
 
   sendingLocation = false;
   loginModalVisible:boolean = false;
   
-  constructor(/* private locationService:LocationService, */ private activatedRoute:ActivatedRoute, 
-  private loginService:LoginService, private appComponent:AppComponent, private driverService:DriverService) { }
+  constructor(private activatedRoute:ActivatedRoute, 
+  private loginService:LoginService, /* private sidebarComponent:SidebarComponent, */ private driverService:DriverService) { }
 
   ngOnInit(): void {
   }
@@ -58,7 +59,7 @@ export class LocationSendingComponent implements OnInit {
     this.loginModalVisible = state;
   }
 
-  setUserData(userData:any){
-    this.appComponent.setUserData(userData);
-  }
+  /* setUserData(userData:any){
+    this.sidebarComponent.setUserData(userData);
+  } */
 }

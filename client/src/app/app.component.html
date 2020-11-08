@@ -5,40 +5,10 @@
     <p id=appName nz-col nzXs=18 nzMd=23>Rastreador de autobuses</p>
   </nz-header>
   <nz-layout>
+    <!-- Sidebar -->
     <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzTrigger]="null">
-        <ul nz-menu nzTheme="dark" [nzInlineCollapsed]="isCollapsed">
-          <li nz-menu-item>
-            <i nz-icon nzType="user" nzTheme="outline"></i>
-            <span *ngIf="user == null">Invitado</span>
-            <span *ngIf="user != null">{{user.names}} {{user.surnames}}</span>
-          </li>
-          <nz-divider></nz-divider>
-          <li nz-menu-item nzTitle="Ayuda">
-            <i nz-icon nzType="home" nzTheme="outline"></i>
-            <span><a [routerLink]="['/home']">Inicio</a></span>
-          </li>
-          <li nz-menu-item nzTitle="Ayuda">
-            <i nz-icon nzType="question-circle" nzTheme="outline"></i>
-            <span>Ayuda</span>
-          </li>
-          <li nz-menu-item (click)="showLoginModal()" *ngIf="user == null">
-            <i nz-icon nzType="login" nzTheme="outline"></i>
-            <span>Iniciar sesión</span>
-          </li>
-          <li nz-menu-item *ngIf="user != null" 
-              nz-popconfirm
-              nzPopconfirmTitle="¿Estás segur@ que deseas cerrar sesión?"
-              (nzOnConfirm)="confirm()"
-              (nzOnCancel)="cancel()"
-              nzPopconfirmPlacement="right"
-              nz-button
-              nzOkText="Sí" nzCancelText="No" 
-          >
-            <i nz-icon nzType="logout" nzTheme="outline"></i>
-            <span>Cerrar sesión</span>
-          </li>
-        </ul>
-    </nz-sider>        
+      <app-sidebar [isCollapsed]="isCollapsed"></app-sidebar>         
+    </nz-sider>
     <!-- body -->
     <nz-content>
         <router-outlet></router-outlet>
@@ -47,6 +17,3 @@
   <!-- Footer -->
   <nz-footer>Footer</nz-footer>
 </nz-layout>
-
-<!-- Modal -->
-<app-login [isVisible]="loginModalVisible" (loginModalVisible)="changeLoginModalState($event)" (userData)=setUserData($event)></app-login>

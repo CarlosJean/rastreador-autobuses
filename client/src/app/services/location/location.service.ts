@@ -16,30 +16,6 @@ export class LocationService {
   
   constructor(private socket:Socket, private http:HttpClient) {}
 
-  getDriversLocation(){
-    //Obtiene la ubicación desde el servidor.
-    return this.socket.fromEvent('location').pipe(map((data)=>data));
-  }
-
-  currentLocation(driverId:string, routeId:string){
-    //Obtiene la ubicación actual de la app cliente.
-   this.navigatorId=  navigator.geolocation.watchPosition((location)=>{
-      let coordinates = {
-        latitude:location.coords.latitude,
-        longitude:location.coords.longitude,
-        altitude:location.coords.altitude,
-        accuracy:location.coords.accuracy,
-        altitudeAccuracy:location.coords.altitudeAccuracy,
-        heading:location.coords.heading,
-        speed:location.coords.speed,
-        timestamp:location.timestamp,
-        driver:driverId,
-        route:routeId
-      }
-      this.socket.emit('location',coordinates);
-    });
-  }
-
   stopLocalization(){
     navigator.geolocation.clearWatch(this.navigatorId);
   }
@@ -53,8 +29,8 @@ export class LocationService {
     return this.http.get(distanceUrl,{params:params});    
   }
 
-  getMyCurrentLocation(callback){
-    return navigator.geolocation.getCurrentPosition(callback);
+  getCurrentLocation(successCallback,errorCallback){
+    return navigator.geolocation.getCurrentPosition(successCallback,errorCallback);
   }
 
   getLiveLocation(successCallback,errorCallback){

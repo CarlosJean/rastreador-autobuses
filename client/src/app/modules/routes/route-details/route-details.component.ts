@@ -16,7 +16,7 @@ export class RouteDetailsComponent implements OnInit {
   constructor(private routesService:RoutesService,private activatedRoute:ActivatedRoute,private loginService:LoginService) { }
 
   ngOnInit(): void {
-    this.getLoggedUser();
+    this.user = this.loginService.userLogged();
     this.activatedRoute.params.subscribe((param)=>{
       this.routesService.getRouteByInternalId(param.internalId).subscribe((route)=>{
         this.route = route[0];
@@ -24,9 +24,10 @@ export class RouteDetailsComponent implements OnInit {
     });
   }
 
-  private getLoggedUser(){
-    this.user = this.loginService.userLogged();
+  /* private getLoggedUser(){
+    
+    console.log(this.user);
     //console.log(this.loginService.userLogged());
-  }
+  } */
 
 }

@@ -19,10 +19,7 @@ export class RoutesComponent implements OnInit {
     //Verificamos si hay usuario logueado.
     this.user = this.loginService.userLogged();
 
-    console.log(this.user);
-
     if(this.user!=null && this.user.charge == 'driver'){
-      console.log('User is driver!');
       this.driverRoute(this.user);
     }else{
       this.routesService.getRoutes().subscribe((routes)=>{

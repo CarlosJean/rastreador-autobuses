@@ -13,11 +13,17 @@ import { LoginService } from 'src/app/services/login/login.service';
 export class RealtimeMapComponent implements OnInit {
 
   @Input() location:any = {};
+  
   //Variable que almacena la ubicación de los conductores de una ruta dada.
   pool:Array<any> = []; 
+
   private selectedDriver = null;
+
+  //Drawer
   drawerVisible:boolean = false;
   placement: NzDrawerPlacement = 'bottom';
+
+  //Locaclización del pasajero
   passengerLatitude = 0;
   passengerLongitude = 0;
 
@@ -42,10 +48,6 @@ export class RealtimeMapComponent implements OnInit {
     this.driverService.getLocation().subscribe((busLocation:any)=>{
       if(busLocation != null) this.addLocationToPool(busLocation);              
     });
-
-    /* this.locationService.getDriversLocation().subscribe((busLocation:any)=>{
-      if(busLocation != null) this.addLocationToPool(busLocation);              
-    }); */
     
     //Cada 5 minutos se eliminan del pool los conductores que no están enviando su ubicación.
     setInterval(()=>{
@@ -79,7 +81,7 @@ export class RealtimeMapComponent implements OnInit {
   }
 
   getDistance(markerInfo){    
-    this.locationService.getMyCurrentLocation((location)=>{
+    this.locationService.getCurrentLocation((location)=>{
 
       //La localización del conductor.
       let origins = markerInfo[0].latitude+','+markerInfo[0].longitude;
@@ -90,17 +92,8 @@ export class RealtimeMapComponent implements OnInit {
         this.distance = res.message;
       });
 
-    });
-
-    /* navigator.geolocation.getCurrentPosition((location)=>{
-      let origins = markerInfo[0].latitude+','+markerInfo[0].longitude;
-      let destinations = location.coords.latitude + ',' + location.coords.longitude;
-      /* this.myLocationLatitude = location.coords.latitude; 
-      this.myLocationLongitude = location.coords.longitude;  
-      this.locationService.distance(origins,destinations).subscribe((res)=>{
-        this.distance = res.message;
-      });
-    }) */
+    },()=>console.error('Ha ocurrido un inconveniente al intentar obtener el tiempo de llegada.'));
+    
   }
 
   drawerClose(): void {
@@ -108,10 +101,10 @@ export class RealtimeMapComponent implements OnInit {
   }
 
   passengerCurrentLocation(){
-    this.locationService.getMyCurrentLocation((location)=>{
+    this.locationService.getCurrentLocation((location)=>{
       this.passengerLatitude = location.coords.latitude;
       this.passengerLongitude = location.coords.longitude;
-    });
+    },()=>console.error('Ha ocurrido un error al intentar obtener la localización actual del pasajero.'));
   }
 
   private eliminateInactiveDrivers(pool:Array<any>){

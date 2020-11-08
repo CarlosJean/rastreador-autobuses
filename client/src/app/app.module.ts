@@ -26,12 +26,14 @@ import { environment } from '../environments/environment';
 /* Angular Fire */
 import { AngularFireModule } from '@angular/fire';
 import { LoginService } from './services/login/login.service';
+import { SidebarComponent } from './layout/sidebar/sidebar.component';
 /* Angular Fire */
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent
+    HeaderComponent,
+    SidebarComponent
   ],
   imports: [
     SharedModule,

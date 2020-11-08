@@ -1,0 +1,36 @@
+
+    <ul nz-menu nzTheme="dark" [nzInlineCollapsed]="isCollapsed">
+      <li nz-menu-item>
+        <i nz-icon nzType="user" nzTheme="outline"></i>
+        <span *ngIf="user == null">Invitado</span>
+        <span *ngIf="user != null">{{user.names}} {{user.surnames}}</span>
+      </li>
+      <nz-divider></nz-divider>
+      <li nz-menu-item nzTitle="Ayuda">
+        <i nz-icon nzType="home" nzTheme="outline"></i>
+        <span><a [routerLink]="['/home']">Inicio</a></span>
+      </li>
+      <li nz-menu-item nzTitle="Ayuda">
+        <i nz-icon nzType="question-circle" nzTheme="outline"></i>
+        <span>Ayuda</span>
+      </li>
+      <li nz-menu-item (click)="showLoginModal()" *ngIf="user == null">
+        <i nz-icon nzType="login" nzTheme="outline"></i>
+        <span>Iniciar sesión</span>
+      </li>
+      <li nz-menu-item *ngIf="user != null" 
+          nz-popconfirm
+          nzPopconfirmTitle="¿Estás segur@ que deseas cerrar sesión?"
+          (nzOnConfirm)="confirmLogout()"
+          (nzOnCancel)="cancelLogout()"
+          nzPopconfirmPlacement="right"
+          nz-button
+          nzOkText="Sí" nzCancelText="No" 
+      >
+        <i nz-icon nzType="logout" nzTheme="outline"></i>
+        <span>Cerrar sesión</span>
+      </li>
+    </ul>
+
+    <!-- Modal -->
+<app-login [isVisible]="loginModalVisible" (loginModalVisible)="changeLoginModalState($event)" (userData)=setUserData($event)></app-login>

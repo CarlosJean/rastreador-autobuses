@@ -12,14 +12,14 @@ export class LocationReceivingComponent implements OnInit {
   constructor(private locationService:LocationService) { }
 
   ngOnInit(): void {
-    this.locationService.getDriversLocation().subscribe(busLocation=>{
+    /* this.locationService.getDriversLocation().subscribe(busLocation=>{
       //Obtener la localización del pasajero.
       navigator.geolocation.watchPosition((data)=>{
         let origin = data.coords.latitude+','+data.coords.longitude;
         let destination = busLocation['latitude']+','+ busLocation['longitude'];
         this.getDuration(origin,destination);
       });
-    });
+    }); */
   }
 
   getDuration(origin='',destination=''){
