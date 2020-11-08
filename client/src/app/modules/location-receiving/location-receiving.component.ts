@@ -24,6 +24,7 @@ export class LocationReceivingComponent implements OnInit {
 
   getDuration(origin='',destination=''){
     this.locationService.distance(origin,destination).subscribe(data=>{
+      console.log(data);
       this.duration = data.message;
     });
   }

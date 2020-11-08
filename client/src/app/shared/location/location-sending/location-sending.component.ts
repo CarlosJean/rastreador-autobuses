@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AppComponent } from 'src/app/app.component';
+import { DriverService } from 'src/app/services/driver/driver.service';
 import { LocationService } from 'src/app/services/location/location.service';
 import { LoginService } from 'src/app/services/login/login.service';
 
@@ -15,8 +16,8 @@ export class LocationSendingComponent implements OnInit {
   sendingLocation = false;
   loginModalVisible:boolean = false;
   
-  constructor(private locationService:LocationService, private activatedRoute:ActivatedRoute, 
-  private loginService:LoginService, private appComponent:AppComponent) { }
+  constructor(/* private locationService:LocationService, */ private activatedRoute:ActivatedRoute, 
+  private loginService:LoginService, private appComponent:AppComponent, private driverService:DriverService) { }
 
   ngOnInit(): void {
   }
@@ -28,16 +29,19 @@ export class LocationSendingComponent implements OnInit {
       return false;
     } 
 
-    //Si el usuario está logueado se le permite enviar o detener el envío de la ubicación.
+    //Si el usuario logueado es un conductor se le permite enviar o detener el envío de la ubicación.
     if(this.sendingLocation){
       this.sendingLocation = false;
-      this.locationService.stopLocalization();
+      this.driverService.stopLocationEmition();
     }else{
       this.sendingLocation = true;      
       let user = this.loginService.userLogged();
 
       this.activatedRoute.params.subscribe((param)=>{
-        this.locationService.currentLocation(user.id,param.internalId);
+        this.driverService.routeId = param.internalId;
+        this.driverService.driverId = user.id;
+        this.driverService.emitLocation();
+        //this.locationService.currentLocation(user.id,param.internalId);
       });
     }
   }

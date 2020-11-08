@@ -7,8 +7,9 @@ module.exports = {
     } ,
     //Función para obtener el tiempo entre dos dstancias. 
       time: (origins = 0, destinations=0)=>{
+        //console.log({origins:origins,destinations:destinations});
         const client = new Client({});
-        client
+        return client
         .distancematrix({
           params: {
             origins: [origins],
@@ -16,13 +17,6 @@ module.exports = {
             key: secrets.googleApiKey,
           },
           timeout: 1000, // milliseconds
-        })
-        .then((r) => {
-          let duration = r.data.rows[0].elements[0].duration.text;
-          return {status:200,message:duration};
-        })
-        .catch((e) => {
-          console.error(e.response.data.error_message);
         });
     } 
 };

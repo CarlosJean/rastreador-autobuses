@@ -27,6 +27,10 @@ import { ReactiveFormsModule,FormsModule } from '@angular/forms';
 import { LocationSendingComponent } from '../location/location-sending/location-sending.component';
 /* Forms */
 
+/* Services */
+import {DriverService} from '../../services/driver/driver.service';
+/* Services */
+
 @NgModule({
   declarations: [LoginComponent, RealtimeMapComponent, LocationSendingComponent],
   imports: [
@@ -58,6 +62,9 @@ import { LocationSendingComponent } from '../location/location-sending/location-
     LoginComponent,NzListModule,RealtimeMapComponent,NzDividerModule,AgmCoreModule,
     NzFormModule,NzInputModule,ReactiveFormsModule,FormsModule,LocationSendingComponent,NzDrawerModule,NzAlertModule,
     NzMessageModule,NzPopconfirmModule
+  ],
+  providers:[
+    DriverService
   ]
 })
 export class SharedModule { }

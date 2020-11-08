@@ -1,5 +1,5 @@
 <agm-map [latitude]="18.5045791" [longitude]="-69.7980006">  
-    <agm-marker [latitude]="myLocationLatitude" [longitude]="myLocationLongitude" [iconUrl]="passengerIcon"></agm-marker>
+    <agm-marker [latitude]="passengerLatitude" [longitude]="passengerLongitude" [iconUrl]="passengerIcon"></agm-marker>
     <agm-marker 
     [latitude]="location.latitude" 
     [longitude]="location.longitude" 
@@ -10,5 +10,7 @@
     ></agm-marker> 
 </agm-map>
 <nz-drawer [nzClosable]="false" [nzVisible]="drawerVisible" [nzPlacement]="placement" nzTitle="Información del autobús" (nzOnClose)="drawerClose()">
-    <p id="distanceInfo">Este autobus llega en 5 minutos aproximadamente.</p>
+    <p id="distanceInfo" *ngIf="distance == ''"> <i nz-icon [nzType]="'loading'" ></i> Obteniendo información de la distancia, espere...</p>
+    
+    <p id="distanceInfo" *ngIf="distance != ''">Este autobus está a {{distance}} de tí.</p>
 </nz-drawer>

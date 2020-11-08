@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NzDrawerPlacement } from 'ng-zorro-antd/drawer';
+import { DriverService } from 'src/app/services/driver/driver.service';
 import { LocationService } from 'src/app/services/location/location.service';
 import { LoginService } from 'src/app/services/login/login.service';
 
@@ -12,30 +13,39 @@ import { LoginService } from 'src/app/services/login/login.service';
 export class RealtimeMapComponent implements OnInit {
 
   @Input() location:any = {};
-  pool:Array<any> = []; //Variable que almacena la ubicación de los conductores de una ruta dada.
+  //Variable que almacena la ubicación de los conductores de una ruta dada.
+  pool:Array<any> = []; 
   private selectedDriver = null;
   drawerVisible:boolean = false;
   placement: NzDrawerPlacement = 'bottom';
-  myLocationLatitude = 0;
-  myLocationLongitude = 0;
-  /* private selectedMarker = null; */
+  passengerLatitude = 0;
+  passengerLongitude = 0;
 
-  markerInfo:any = {}; //Almacena los datos del conductor, dependiendo del marcador seleccionado.
+  //Variable que almacena la distancia(en tiempo) entre un conductor y un pasajero.
+  distance:string = ''; 
+
+  //Almacena los datos del conductor, dependiendo del marcador seleccionado.
+  markerInfo:any = {}; 
 
   //Marcador de autobus
   passengerIcon = { url: '../../assets/icons/blue-map-marker.png', scaledSize: {height: 40, width: 25}}
   busIcon = { url: '../../assets/icons/autobus.png', scaledSize: {height: 40, width: 40}}
 
-  constructor(private locationService:LocationService,private activatedRoute:ActivatedRoute,private loginService:LoginService) { }
+  constructor(private locationService:LocationService,private activatedRoute:ActivatedRoute,private loginService:LoginService,
+    private driverService:DriverService) { }
 
   ngOnInit(): void {
 
     //Si el usuario logueado es invitado se obtiene la localización actual.
-    if(this.loginService.userLogged() == null) this.myCurrentLocation();
+    if(this.loginService.userLogged() == null) this.passengerCurrentLocation();
     
-    this.locationService.getDriversLocation().subscribe((busLocation:any)=>{
+    this.driverService.getLocation().subscribe((busLocation:any)=>{
       if(busLocation != null) this.addLocationToPool(busLocation);              
     });
+
+    /* this.locationService.getDriversLocation().subscribe((busLocation:any)=>{
+      if(busLocation != null) this.addLocationToPool(busLocation);              
+    }); */
     
     //Cada 5 minutos se eliminan del pool los conductores que no están enviando su ubicación.
     setInterval(()=>{
@@ -44,7 +54,7 @@ export class RealtimeMapComponent implements OnInit {
 
   }
 
-  addLocationToPool(busLocation:any){
+  private addLocationToPool(busLocation:any){
     //Verificamos la ruta de la cual se quiere obtener información.
     this.activatedRoute.params.subscribe((param)=>{
       if(param.internalId == busLocation.route){
@@ -69,29 +79,42 @@ export class RealtimeMapComponent implements OnInit {
   }
 
   getDistance(markerInfo){    
-    navigator.geolocation.getCurrentPosition((location)=>{
+    this.locationService.getMyCurrentLocation((location)=>{
+
+      //La localización del conductor.
+      let origins = markerInfo[0].latitude+','+markerInfo[0].longitude;
+      //La localización actual del pasajero.
+      let destinations = location.coords.latitude + ',' + location.coords.longitude;
+
+      this.locationService.distance(origins,destinations).subscribe((res)=>{
+        this.distance = res.message;
+      });
+
+    });
+
+    /* navigator.geolocation.getCurrentPosition((location)=>{
       let origins = markerInfo[0].latitude+','+markerInfo[0].longitude;
       let destinations = location.coords.latitude + ',' + location.coords.longitude;
-      this.myLocationLatitude = location.coords.latitude; 
-      this.myLocationLongitude = location.coords.longitude; 
+      /* this.myLocationLatitude = location.coords.latitude; 
+      this.myLocationLongitude = location.coords.longitude;  
       this.locationService.distance(origins,destinations).subscribe((res)=>{
-        console.log(res);
+        this.distance = res.message;
       });
-    })
+    }) */
   }
 
   drawerClose(): void {
     this.drawerVisible = false;
   }
 
-  myCurrentLocation(){
+  passengerCurrentLocation(){
     this.locationService.getMyCurrentLocation((location)=>{
-      this.myLocationLatitude = location.coords.latitude;
-      this.myLocationLongitude = location.coords.longitude;
+      this.passengerLatitude = location.coords.latitude;
+      this.passengerLongitude = location.coords.longitude;
     });
   }
 
-  eliminateInactiveDrivers(pool:Array<any>){
+  private eliminateInactiveDrivers(pool:Array<any>){
     /* Función que elimina del pool la ubicación de los conductores que han dejado de emitir su ubicación.*/
 
     if(pool.length > 0){

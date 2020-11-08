@@ -57,4 +57,8 @@ export class LocationService {
     return navigator.geolocation.getCurrentPosition(callback);
   }
 
+  getLiveLocation(successCallback,errorCallback){
+    return navigator.geolocation.watchPosition(successCallback,errorCallback);
+  }
+
 }

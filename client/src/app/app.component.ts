@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { LocationService } from './services/location/location.service';
 import { LoginService } from './services/login/login.service';
 
@@ -25,7 +25,6 @@ export class AppComponent {
   }
 
   loginModal(){
-    //Función que 
     this.loginModalVisible ? this.loginModalVisible = false : this.loginModalVisible = true;
   }
 

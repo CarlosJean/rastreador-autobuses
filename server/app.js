@@ -15,10 +15,21 @@ app.use((req, res, next) => {
 });
 
 /* Router */
+app.get('/',(req,res)=>{
+
+});
 app.get('/distance',(req,res)=>{
  origins = req.query.origins;
  destinations = req.query.destinations;
- //console.log('Time: '+locationService.time(origins,destinations));
+
+ locationService.time(origins,destinations).then((r) => {
+   let duration = r.data.rows[0].elements[0].duration.text;
+   res.status(200).json({message:duration});
+ })
+ .catch((e) => {
+   console.error(e.response.data.error_message);
+ });
+
 });
 /* Router */
 
