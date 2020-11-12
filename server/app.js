@@ -16,7 +16,7 @@ app.use((req, res, next) => {
 
 /* Router */
 app.get('/',(req,res)=>{
-
+	res.status(200);
 });
 app.get('/distance',(req,res)=>{
  origins = req.query.origins;
