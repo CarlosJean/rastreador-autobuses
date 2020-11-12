@@ -60,31 +60,48 @@ export class RealtimeMapComponent implements OnInit {
     //Verificamos la ruta de la cual se quiere obtener información.
     this.activatedRoute.params.subscribe((param)=>{
       if(param.internalId == busLocation.route){
+
         let driverExists = this.pool.some((location)=>location.driver == busLocation.driver);
         if(driverExists){
           //Si el conductor ya existe en el pool entonces se remueve para volver a introducir la información de su localización.
-          var removeIndex = this.pool.map(function(item) { return item.driver; }).indexOf(busLocation.driver);
-          this.pool.splice(removeIndex, 1);
-        }
+          //Se obtiene el indice del objeto de la localización dentro del pool.
+          var removeIndex = this.pool.map(function(item) { return item.driver; }).indexOf(busLocation.driver); 
 
-        this.pool.push(busLocation);    
-        
-        this.markerInfo = this.pool.filter((element)=>this.selectedDriver == element.driver);
-        if(this.markerInfo.length > 0) this.getDistance(this.markerInfo);        
+          //Antes de eliminarlo se consigue su la última localización de este conductor. 
+          let lastLocation = this.getLastDriverLocation(removeIndex);
+          busLocation.lastLatitude = lastLocation.latitude;
+          busLocation.lastLongitude = lastLocation.longitude;
+
+          //Elimina el objeto.
+          this.pool.splice(removeIndex, 1);
+        }else{
+          busLocation.lastLatitude = null;
+          busLocation.lastLongitude = null;
+        }
+        this.pool.push(busLocation);
       }  
     });
   }
 
   markerClick(driverId){
     this.selectedDriver = driverId;   
-    this.drawerVisible = true; 
+    this.drawerVisible = true;         
+      
+    //Se consigue la información de acuerdo al autobus cliqueado en el mapa
+    this.markerInfo = this.pool.filter((element)=>this.selectedDriver == element.driver)[0];
+
+    //Se determina si hay un conductor seleccionado.
+    if(this.markerInfo != null) {
+      if(this.markerInfo.latitude != this.markerInfo.lastLatitude && this.markerInfo.longitude != this.markerInfo.lastLongitude)
+        this.getDistance(this.markerInfo);
+    }
   }
 
   getDistance(markerInfo){    
     this.locationService.getCurrentLocation((location)=>{
 
       //La localización del conductor.
-      let origins = markerInfo[0].latitude+','+markerInfo[0].longitude;
+      let origins = markerInfo.latitude+','+markerInfo.longitude;
       //La localización actual del pasajero.
       let destinations = location.coords.latitude + ',' + location.coords.longitude;
 
@@ -130,5 +147,11 @@ export class RealtimeMapComponent implements OnInit {
       });
     }
 
+  }
+
+  private getLastDriverLocation(index){
+    let driverLocation = this.pool[index];
+
+    return {latitude:driverLocation.latitude, longitude:driverLocation.longitude};
   }
 }
