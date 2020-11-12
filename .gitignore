@@ -4,4 +4,3 @@ client/src/environments/environment.prod.ts
 
 
 #server
-server/global/secrets.js
