@@ -1,5 +1,10 @@
-<div>    
-    <nz-list nzBordered nzSize="small" [nzHeader]="routesCardHeader">
+<div nz-row nzJustify="space-around">
+    <div nz-col nzSpan=20>
+      <div nz-row nzJustify="end">
+        <button nz-button nzType="primary" (click)="showNewRouteModel()" nz-col nzSpan=5>Añadir nueva ruta</button> 
+      </div>
+    </div>
+    <nz-list nzBordered nzSize="small" [nzHeader]="routesCardHeader" nz-col nzSpan=20>
         <nz-list-item *ngFor="let route of routes">         
           <a [routerLink]="['./route-details',route.internal_id]">{{route.nombre}}</a>              
         </nz-list-item>
@@ -9,3 +14,32 @@
 <ng-template #routesCardHeader>
   <h5>Rutas</h5>
 </ng-template>
+
+<!-- Modal de nueva ruta -->
+<nz-modal [(nzVisible)]="newRouteModalVisible" nzTitle="Nueva ruta" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+  <form nz-form>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6" nzFor="internal_id">Id interno</nz-form-label>
+      <nz-form-control [nzSpan]="14">
+        <input nz-input name="internal_id" type="text" id="txtInternalId" placeholder="Ingrese el id interno de la ruta">
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6" nzFor="route_name">Nombre</nz-form-label>
+      <nz-form-control [nzSpan]="14">
+        <input nz-input name="route_name" type="text" id="txtRouteName" placeholder="Ingrese el nombre de la ruta">
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6" nzFor="description">Descripción</nz-form-label>
+      <nz-form-control [nzSpan]="14">
+        <textarea nz-input [nzAutosize]="{ minRows: 10, maxRows: 10 }" placeholder="Ingrese una descripción de la ruta"></textarea>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+  <div *nzModalFooter>
+    <button nz-button nzType="default" (click)="handleCancel()">Cancelar</button>
+    <button nz-button nzType="primary" (click)="handleOk()" [nzLoading]="isConfirmLoading">Guardar</button>
+  </div>
+</nz-modal>
+

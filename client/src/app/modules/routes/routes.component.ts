@@ -12,6 +12,8 @@ export class RoutesComponent implements OnInit {
 
   user:any = {};
   routes:Array<any> = [];
+  newRouteModalVisible:boolean = false;
+
   constructor(private routesService:RoutesService, private loginService:LoginService) { }
 
   ngOnInit():void {
@@ -36,5 +38,17 @@ export class RoutesComponent implements OnInit {
         });    
       });
     });
-  }  
+  }
+  
+  showNewRouteModel():void{
+    this.newRouteModalVisible = true;
+  }
+
+  handleCancel():void{
+    this.newRouteModalVisible = false;
+  }
+
+  handleOk():void{
+    
+  }
 }
