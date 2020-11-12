@@ -4,7 +4,7 @@
 
 import { SocketIoConfig } from 'ngx-socket-io';
 /* Socket IO Config */
-const socketIOConfig: SocketIoConfig = { url: 'http://localhost:3000/', options: {origins: 'allowedOrigins'} };
+const socketIOConfig: SocketIoConfig = { url: "https://dominicanbustracker.herokuapp.com", options: {origins: 'allowedOrigins'} };
 /* Socket IO Config */
 
 export const environment = {
@@ -18,7 +18,8 @@ export const environment = {
     messagingSenderId: '924155774810'
   },
   socketIO: socketIOConfig,
-  googleApiKey:'AIzaSyDcmHvB8H06BFKCoyYypWgkwYFN6A_YBsc'
+  googleApiKey:'AIzaSyDcmHvB8H06BFKCoyYypWgkwYFN6A_YBsc',
+  server_url: "https://dominicanbustracker.herokuapp.com"/* "http://localhost:3000" */
   /* googleApiKey:'AIzaSyAMlYbiejd5AybZatCXnzA9vR5UCOSSEPQ' */
 };
 

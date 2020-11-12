@@ -3,18 +3,19 @@ import { Injectable } from '@angular/core';
 import { Socket } from 'ngx-socket-io';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import {environment} from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LocationService {
 
-  serverUrl = 'http://localhost:3000';
+  serverUrl = environment.server_url;
   navigatorId = 0;
   
   readonly inactiveTimeLimit = 1; //Limite de tiempo que un conductor puede estar inactivo sin enviar ubicación.
   
-  constructor(private socket:Socket, private http:HttpClient) {}
+  constructor(private http:HttpClient) {}
 
   stopLocalization(){
     navigator.geolocation.clearWatch(this.navigatorId);
