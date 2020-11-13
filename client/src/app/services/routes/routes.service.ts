@@ -12,12 +12,12 @@ export class RoutesService {
 
   getRoutes():Observable<any>{
     //Se obtienen las rutas existentes en la base de datos.
-    return this.firestore.collection('rutas').valueChanges();
+    return this.firestore.collection('routes').valueChanges();
   }
 
   getRouteByInternalId(internalId:string):Observable<any>{
     //Se obtiene información acerca de una determinada ruta.
-    return this.firestore.collection('rutas',ref=>ref.where('internal_id','==', internalId)).valueChanges();
+    return this.firestore.collection('routes',ref=>ref.where('internal_id','==', internalId)).valueChanges();
   }
 
   getDriverRoutes(idDriver:string):Observable<any>{
@@ -25,7 +25,7 @@ export class RoutesService {
   }
 
   getRouteById(routeId:string):Observable<any>{
-    return this.firestore.collection('rutas',ref=>ref.where('id','==',routeId)).valueChanges();     
+    return this.firestore.collection('routes',ref=>ref.where('id','==',routeId)).valueChanges();     
   }
 
 }

@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { RouteDetailsComponent } from 'src/app/modules/routes/route-details/route-details.component';
 import {LoginService} from '../../services/login/login.service';
 /* import {Md5} from 'ts-md5/dist/md5'; */
 @Component({
@@ -23,7 +24,7 @@ export class LoginComponent implements OnInit {
   });
 
 
-  constructor(private loginService:LoginService, private message: NzMessageService) { }
+  constructor(private loginService:LoginService, private message: NzMessageService/* , private routeDetails:RouteDetailsComponent */) { }
 
   ngOnInit(): void {
   }
@@ -37,8 +38,7 @@ export class LoginComponent implements OnInit {
       if(userFound.length > 0){
         let UserData = userFound[0];
         sessionStorage.setItem('userData',JSON.stringify(UserData));
-        //console.log(UserData);
-        //this.loginService.userLogged();
+        //this.routeDetails.user = UserData;
         this.userData.emit(UserData);
         this.userNotFound = false;
         this.loginModalVisible.emit(false);

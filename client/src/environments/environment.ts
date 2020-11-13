@@ -19,7 +19,7 @@ export const environment = {
   },
   socketIO: socketIOConfig,
   googleApiKey:'AIzaSyDcmHvB8H06BFKCoyYypWgkwYFN6A_YBsc',
-  server_url: "https://dominicanbustracker.herokuapp.com"/* "http://localhost:3000" */
+  server_url: "https://dominicanbustracker.herokuapp.com"/* "http://localhost:5000" */
   /* googleApiKey:'AIzaSyAMlYbiejd5AybZatCXnzA9vR5UCOSSEPQ' */
 };
 

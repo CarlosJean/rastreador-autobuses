@@ -121,7 +121,7 @@ export class RealtimeMapComponent implements OnInit {
     this.locationService.getCurrentLocation((location)=>{
       this.passengerLatitude = location.coords.latitude;
       this.passengerLongitude = location.coords.longitude;
-    },()=>console.error('Ha ocurrido un error al intentar obtener la localización actual del pasajero.'));
+    },()=>{alert('Active su ubicación para determinar el tiempo de llegada del transporte.'); console.error('Ha ocurrido un error al intentar obtener la localización actual del pasajero.');});
   }
 
   private eliminateInactiveDrivers(pool:Array<any>){
@@ -151,7 +151,6 @@ export class RealtimeMapComponent implements OnInit {
 
   private getLastDriverLocation(index){
     let driverLocation = this.pool[index];
-
     return {latitude:driverLocation.latitude, longitude:driverLocation.longitude};
   }
 }

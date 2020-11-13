@@ -1,7 +1,11 @@
 <div nz-row [nzGutter]="[16, 24]" nzJustify="space-around" nzAlign="top" class="container">
-    <div nz-col>
-        <nz-card style="width:300px;" nzTitle="Rutas">
+    <div nz-col nzSpan=12>
+        <nz-card [nzTitle]="routesCardHeader" *ngIf="user != null && user.charge == 'administrator'">
             <p><a [routerLink]="['/rutas']">Visualizar rutas</a></p>
         </nz-card>
     </div>
 </div>
+
+<ng-template #routesCardHeader>
+    Rutas
+</ng-template>

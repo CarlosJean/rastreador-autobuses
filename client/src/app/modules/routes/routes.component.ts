@@ -25,7 +25,8 @@ export class RoutesComponent implements OnInit {
       this.driverRoute(this.user);
     }else{
       this.routesService.getRoutes().subscribe((routes)=>{
-        this.routes = routes;
+        if(routes.length > 0)
+          this.routes = routes;        
       })
     }
   }
