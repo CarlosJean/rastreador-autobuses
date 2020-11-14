@@ -4,6 +4,7 @@ const server = require('http').createServer(app);
 const options = { /* ... */ };
 const { Console } = require('console');
 var locationService = require('./services/location-service');
+const translationService = require('./services/translation-service');
 const realtimeEngine = require('./services/realtime-engine');
 const PORT = process.env.PORT || 5000;
 
@@ -24,10 +25,9 @@ app.get('/distance',(req,res)=>{
  origins = req.query.origins;
  destinations = req.query.destinations;
 
- console.info('Obteniendo tiempo de llegada.');
-
  locationService.time(origins,destinations).then((r) => {
    let duration = r.data.rows[0].elements[0].duration.text;
+   console.log(duration);
    res.status(200).json({message:duration});
  })
  .catch((e) => {

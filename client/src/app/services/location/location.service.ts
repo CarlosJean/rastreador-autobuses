@@ -13,7 +13,7 @@ export class LocationService {
   serverUrl = environment.server_url;
   navigatorId = 0;
   
-  readonly inactiveTimeLimit = 1; //Limite de tiempo (en minutos) que un conductor puede estar inactivo sin enviar ubicación.
+  readonly inactiveTimeLimit = 3; //Limite de tiempo (en minutos) que un conductor puede estar inactivo sin enviar ubicación.
   
   constructor(private http:HttpClient) {}
 

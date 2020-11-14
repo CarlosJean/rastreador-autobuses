@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/CarlosJean/rastreador-autobuses#readme",
   "dependencies": {
+    "@google-cloud/translate": "^6.0.3",
     "@googlemaps/google-maps-services-js": "^3.1.13",
     "express": "^4.17.1",
     "socket.io": "^2.3.0"

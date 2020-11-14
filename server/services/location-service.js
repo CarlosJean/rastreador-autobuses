@@ -6,18 +6,18 @@ module.exports = {
         return JSON.stringify({origins:origins,destinations:destinations});
     } ,
     //Función para obtener el tiempo entre dos dstancias. 
-      time: (origins = 0, destinations=0)=>{
-        //console.log({origins:origins,destinations:destinations});
-        const client = new Client({});
-        return client
-        .distancematrix({
-          params: {
-            origins: [origins],
-            destinations: [destinations],
-            key: secrets.googleApiKey,
-          },
-          timeout: 1000, // milliseconds
-        });
+    time: (origins = 0, destinations=0)=>{
+      const client = new Client({});
+      return client
+      .distancematrix({
+        params: {
+          origins: [origins],
+          destinations: [destinations],
+          key: secrets.googleApiKey,
+          language:'es'
+        },
+        timeout: 1000, // milliseconds
+      });
     } 
 };
 

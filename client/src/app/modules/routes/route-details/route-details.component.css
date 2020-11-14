@@ -10,6 +10,10 @@
 
 .cardStyle .ant-card-wider-padding .ant-card-body { padding: 0}
 
+.ant-card-body{
+    padding: 0;
+}
+
 /* #realtimeMapCard iframe{
     width: 100%;
 } */

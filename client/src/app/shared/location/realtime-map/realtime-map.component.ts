@@ -84,6 +84,9 @@ export class RealtimeMapComponent implements OnInit {
   }
 
   markerClick(driverId){
+
+    if(driverId != this.selectedDriver) this.distance = '';
+    
     this.selectedDriver = driverId;   
     this.drawerVisible = true;         
       
