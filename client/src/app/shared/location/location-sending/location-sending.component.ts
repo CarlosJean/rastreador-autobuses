@@ -5,6 +5,7 @@ import { DriverService } from 'src/app/services/driver/driver.service';
 import { LocationService } from 'src/app/services/location/location.service';
 import { LoginService } from 'src/app/services/login/login.service';
 import {SidebarComponent} from 'src/app/layout/sidebar/sidebar.component';
+import { NzMessageComponent, NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({
   selector: 'app-location-sending',
@@ -18,7 +19,7 @@ export class LocationSendingComponent implements OnInit {
   loginModalVisible:boolean = false;
   
   constructor(private activatedRoute:ActivatedRoute, 
-  private loginService:LoginService, /* private sidebarComponent:SidebarComponent, */ private driverService:DriverService) { }
+  private loginService:LoginService, private driverService:DriverService, private message:NzMessageService) { }
 
   ngOnInit(): void {
   }
@@ -34,6 +35,7 @@ export class LocationSendingComponent implements OnInit {
     if(this.sendingLocation){
       this.sendingLocation = false;
       this.driverService.stopLocationEmition();
+      this.message.info('Se detuvo el envío de su ubicación.');
     }else{
       this.sendingLocation = true;      
       let user = this.loginService.userLogged();
@@ -42,7 +44,7 @@ export class LocationSendingComponent implements OnInit {
         this.driverService.routeId = param.internalId;
         this.driverService.driverId = user.id;
         this.driverService.emitLocation();
-        //this.locationService.currentLocation(user.id,param.internalId);
+        this.message.info('Empezó a enviar su ubicación.');
       });
     }
   }
