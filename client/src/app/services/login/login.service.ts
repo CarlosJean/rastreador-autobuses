@@ -7,8 +7,10 @@ import { Observable } from 'rxjs';
 })
 export class LoginService {
 
-
-  constructor(private firestore:AngularFirestore) { }
+  user:any = {};
+  constructor(private firestore:AngularFirestore) { 
+    this.user = this.userLogged();
+  }
 
   findUser(documentNumber = null, password = null):Observable<any>{
     //Busca el usuario dado un número de documento y una contraseña.
@@ -24,5 +26,9 @@ export class LoginService {
   logout(){
     //Remueve el objeto usuario que está en el almacenamiento de la sesión.
     sessionStorage.removeItem('userData');
+  }
+
+  setUser():void{
+    this.user = this.userLogged();
   }
 }

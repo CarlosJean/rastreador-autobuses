@@ -1,12 +1,12 @@
 <div nz-row nzJustify="space-around">
-    <div nz-col nzSpan=20>
+    <!-- <div nz-col nzSpan=20>
       <div nz-row nzJustify="end">
         <button nz-button nzType="primary" (click)="showNewRouteModel()" nz-col nzSpan=5>Añadir nueva ruta</button> 
       </div>
-    </div>
+    </div> -->
     <nz-list nzBordered nzSize="small" [nzHeader]="routesCardHeader" nz-col nzSpan=20>
         <nz-list-item *ngFor="let route of routes">         
-          <a [routerLink]="['./route-details',route.internal_id]">{{route.nombre}}</a>              
+          <a [routerLink]="['./detalle',route.internal_id]">{{route.name}}</a>              
         </nz-list-item>
     </nz-list>
 </div>

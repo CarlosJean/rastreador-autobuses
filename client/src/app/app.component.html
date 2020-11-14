@@ -6,7 +6,12 @@
   </nz-header>
   <nz-layout>
     <!-- Sidebar -->
-    <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzTrigger]="null">
+    <nz-sider 
+    nzCollapsible 
+    [(nzCollapsed)]="isCollapsed" 
+    [nzTrigger]="null"
+    [nzCollapsedWidth]=0
+    [nzWidth]="150">
       <app-sidebar [isCollapsed]="isCollapsed"></app-sidebar>         
     </nz-sider>
     <!-- body -->
@@ -15,5 +20,5 @@
     </nz-content>
   </nz-layout>
   <!-- Footer -->
-  <nz-footer>Footer</nz-footer>
+  <nz-footer>&copy; {{year}} Todos los derechos reservados.</nz-footer>
 </nz-layout>

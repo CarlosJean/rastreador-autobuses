@@ -1,13 +1,38 @@
-nz-card{
+/* nz-card{
     width: 95%;
     margin: 0 auto;
-}
+} */
 
 ::ng-deep .ant-card-head{
     background: #1890ff;
     color: white;
 }
 
-#realtimeMapCard iframe{
+.cardStyle .ant-card-wider-padding .ant-card-body { padding: 0}
+
+/* #realtimeMapCard iframe{
     width: 100%;
+} */
+
+/* div#cardLocation{
+    background: white;
+    box-shadow: 0px 0px 3px gray;
+    padding: 0px !important;
 }
+ */
+
+/* #cardLocation div[nz-row]{
+    padding: 0px;
+}
+
+#cardLocation .content{
+	padding: 1.5%;	
+}
+
+div#cardLocation .header {
+	height: 70px;
+	color: white;
+	background: #1890ff;
+	font-size: 18px;
+	padding: 20px;
+} */

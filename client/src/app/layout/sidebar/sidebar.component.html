@@ -10,10 +10,6 @@
         <i nz-icon nzType="home" nzTheme="outline"></i>
         <span><a [routerLink]="['/home']">Inicio</a></span>
       </li>
-      <li nz-menu-item nzTitle="Ayuda">
-        <i nz-icon nzType="question-circle" nzTheme="outline"></i>
-        <span>Ayuda</span>
-      </li>
       <li nz-menu-item (click)="showLoginModal()" *ngIf="user == null">
         <i nz-icon nzType="login" nzTheme="outline"></i>
         <span>Iniciar sesión</span>

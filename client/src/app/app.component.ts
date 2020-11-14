@@ -12,11 +12,13 @@ export class AppComponent {
   title = 'client';
   isCollapsed = true;
   loginModalVisible = false;
+  year:number = 0;
   //user:any = this.loginService.userLogged();
   
   constructor(/* private loginService:LoginService, private router:Router, private locationService:LocationService */){
   }
 
   ngOnInit():void{ 
+    this.year = new Date().getFullYear();
   }
 }

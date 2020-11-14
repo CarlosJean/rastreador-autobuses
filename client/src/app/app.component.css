@@ -5,7 +5,7 @@
 
 #appName{
     color: white;
-	font-size: 25px;
+	font-size: 3vw;
 	text-align: center;
 }
 
@@ -37,3 +37,9 @@ nz-sider[nz-menu-item]{
 }
 /* Sider */
 
+/* Footer */
+nz-footer {
+	background: #001529;
+	color: white;
+}
+/* Footer */
