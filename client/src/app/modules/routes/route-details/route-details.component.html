@@ -1,7 +1,7 @@
 <div nz-row nzJustify="center" [nzGutter]="[16, 24]">
     <!-- Card details -->
     <nz-card [nzTitle]=title id="routeDetailsCard" nz-col nzSpan=22>
-        <p><strong>{{route.name}}.</strong> {{route.description}}</p>
+        <p *ngIf="route != null"><strong>{{route.name}}.</strong> {{route.description}}</p>
     </nz-card>
     
     <ng-template #title >
