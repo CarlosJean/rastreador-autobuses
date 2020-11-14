@@ -27,4 +27,8 @@ export class LoginService {
     //Remueve el objeto usuario que está en el almacenamiento de la sesión.
     sessionStorage.removeItem('userData');
   }
+
+  setUser():void{
+    this.user = this.userLogged();
+  }
 }

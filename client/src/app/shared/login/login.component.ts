@@ -39,6 +39,7 @@ export class LoginComponent implements OnInit {
         let UserData = userFound[0];
         sessionStorage.setItem('userData',JSON.stringify(UserData));
         //this.routeDetails.user = UserData;
+        this.loginService.setUser();
         this.userData.emit(UserData);
         this.userNotFound = false;
         this.loginModalVisible.emit(false);

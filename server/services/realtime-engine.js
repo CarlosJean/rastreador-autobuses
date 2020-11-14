@@ -1,6 +1,5 @@
 module.exports = (server,options)=>{
     const io = require('socket.io')(server, options);
-    var pool  = [];
 
     io.on('connection',socket=>{
         console.log('client connected!');
