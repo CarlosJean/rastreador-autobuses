@@ -4,7 +4,6 @@ const server = require('http').createServer(app);
 const options = { /* ... */ };
 const { Console } = require('console');
 var locationService = require('./services/location-service');
-const translationService = require('./services/translation-service');
 const realtimeEngine = require('./services/realtime-engine');
 const PORT = process.env.PORT || 5000;
 
