@@ -67,18 +67,22 @@ export class RealtimeMapComponent implements OnInit {
           //Se obtiene el indice del objeto de la localización dentro del pool.
           var removeIndex = this.pool.map(function(item) { return item.driver; }).indexOf(busLocation.driver); 
 
-          //Antes de eliminarlo se consigue su la última localización de este conductor. 
+          //Antes de eliminarlo se consigue la última localización de este conductor. 
           let lastLocation = this.getLastDriverLocation(removeIndex);
           busLocation.lastLatitude = lastLocation.latitude;
           busLocation.lastLongitude = lastLocation.longitude;
 
+          this.pool[removeIndex].latitude = busLocation.latitude;
+          this.pool[removeIndex].longitude = busLocation.longitude;          
           //Elimina el objeto.
-          this.pool.splice(removeIndex, 1);
+          //this.pool.splice(removeIndex, 1);
         }else{
           busLocation.lastLatitude = null;
           busLocation.lastLongitude = null;
-        }
-        this.pool.push(busLocation);
+          this.pool.push(busLocation);
+        }     
+        //this.markerClick(busLocation.driver);
+        this.getDistance(this.markerInfo);
       }  
     });
   }
@@ -88,32 +92,34 @@ export class RealtimeMapComponent implements OnInit {
     if(driverId != this.selectedDriver) this.distance = '';
     
     this.selectedDriver = driverId;   
-    this.drawerVisible = true;         
+    //this.drawerVisible = true;         
       
     //Se consigue la información de acuerdo al autobus cliqueado en el mapa
     this.markerInfo = this.pool.filter((element)=>this.selectedDriver == element.driver)[0];
 
     //Se determina si hay un conductor seleccionado.
-    if(this.markerInfo != null) {
-      if(this.markerInfo.latitude != this.markerInfo.lastLatitude && this.markerInfo.longitude != this.markerInfo.lastLongitude)
-        this.getDistance(this.markerInfo);
-    }
+    this.getDistance(this.markerInfo);    
   }
 
   getDistance(markerInfo){    
-    this.locationService.getCurrentLocation((location)=>{
 
-      //La localización del conductor.
-      let origins = markerInfo.latitude+','+markerInfo.longitude;
-      //La localización actual del pasajero.
-      let destinations = location.coords.latitude + ',' + location.coords.longitude;
+    if(markerInfo != null) {
+      if(markerInfo.latitude != markerInfo.lastLatitude && markerInfo.longitude != markerInfo.lastLongitude){
 
-      this.locationService.distance(origins,destinations).subscribe((res)=>{
-        this.distance = res.message;
-      });
+        this.locationService.getCurrentLocation((location)=>{
 
-    },()=>console.error('Ha ocurrido un inconveniente al intentar obtener el tiempo de llegada.'));
-    
+          //La localización del conductor.
+          let origins = markerInfo.latitude+','+markerInfo.longitude;
+          //La localización actual del pasajero.
+          let destinations = location.coords.latitude + ',' + location.coords.longitude;
+
+          this.locationService.distance(origins,destinations).subscribe((res)=>{
+            this.distance = res.message;
+          });
+
+        },()=>console.error('Ha ocurrido un inconveniente al intentar obtener el tiempo de llegada.'));
+      }
+    }    
   }
 
   drawerClose(): void {

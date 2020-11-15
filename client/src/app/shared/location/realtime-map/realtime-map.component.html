@@ -6,8 +6,12 @@
     *ngFor="let location of pool" 
     (markerClick)="markerClick(location.driver)"
     [iconUrl]= "busIcon"
-    class="busMarker"
-    ></agm-marker> 
+    class="busMarker">
+        <agm-info-window>
+            <p id="distanceInfo" *ngIf="distance == ''"> <i nz-icon [nzType]="'loading'" ></i> Obteniendo información de la distancia, por favor espere...</p>    
+            <p id="distanceInfo" *ngIf="distance != ''">Este autobus está a {{distance}} de tí.</p>
+        </agm-info-window>
+    </agm-marker> 
 </agm-map>
 <nz-drawer [nzClosable]="false" [nzVisible]="drawerVisible" [nzPlacement]="placement" nzTitle="Información del autobús" (nzOnClose)="drawerClose()">
     <p id="distanceInfo" *ngIf="distance == ''"> <i nz-icon [nzType]="'loading'" ></i> Obteniendo información de la distancia, espere...</p>
