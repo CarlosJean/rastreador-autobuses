@@ -4,10 +4,10 @@
     [latitude]="location.latitude" 
     [longitude]="location.longitude" 
     *ngFor="let location of pool" 
-    (markerClick)="markerClick(location.driver)"
+    (markerClick)="markerClick(location.driver,infoWindow)"
     [iconUrl]= "busIcon"
     class="busMarker">
-        <agm-info-window>
+        <agm-info-window #infoWindow>
             <p id="distanceInfo" *ngIf="distance == ''"> <i nz-icon [nzType]="'loading'" ></i> Obteniendo información de la distancia, por favor espere...</p>    
             <p id="distanceInfo" *ngIf="distance != ''">Este autobus está a {{distance}} de tí.</p>
         </agm-info-window>

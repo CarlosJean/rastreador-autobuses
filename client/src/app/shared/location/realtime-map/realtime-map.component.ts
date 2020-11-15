@@ -37,6 +37,8 @@ export class RealtimeMapComponent implements OnInit {
   passengerIcon = { url: '../../assets/icons/blue-map-marker.png', scaledSize: {height: 40, width: 25}}
   busIcon = { url: '../../assets/icons/autobus.png', scaledSize: {height: 40, width: 40}}
 
+  previousInfoWindow;
+
   constructor(private locationService:LocationService,private activatedRoute:ActivatedRoute,private loginService:LoginService,
     private driverService:DriverService) { }
 
@@ -82,23 +84,28 @@ export class RealtimeMapComponent implements OnInit {
           this.pool.push(busLocation);
         }     
         //this.markerClick(busLocation.driver);
-        this.getDistance(this.markerInfo);
+        //this.getDistance(this.markerInfo);
       }  
     });
   }
 
-  markerClick(driverId){
+  markerClick(driverId,infoWindow){
 
     if(driverId != this.selectedDriver) this.distance = '';
     
     this.selectedDriver = driverId;   
     //this.drawerVisible = true;         
       
+    if (this.previousInfoWindow) 
+      this.previousInfoWindow.close();    
+
+    this.previousInfoWindow = infoWindow;
+
     //Se consigue la información de acuerdo al autobus cliqueado en el mapa
-    this.markerInfo = this.pool.filter((element)=>this.selectedDriver == element.driver)[0];
+    this.markerInfo = this.pool.filter((element)=>driverId == element.driver)[0];
 
     //Se determina si hay un conductor seleccionado.
-    this.getDistance(this.markerInfo);    
+    //this.getDistance(this.markerInfo);    
   }
 
   getDistance(markerInfo){    

@@ -61,6 +61,10 @@ export class LocationSendingComponent implements OnInit {
     this.loginModalVisible = state;
   }
 
+  ngOnDestroy():void{
+    this.driverService.stopLocationEmition();
+  }
+
   /* setUserData(userData:any){
     this.sidebarComponent.setUserData(userData);
   } */
